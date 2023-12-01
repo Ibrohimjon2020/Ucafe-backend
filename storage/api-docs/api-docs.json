@@ -1,0 +1,1987 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "u-cafe",
+        "description": "Documentation for u-cafe admin dashboard and main site",
+        "contact": {
+            "email": "s.murodjonov@uzinfocom.uz"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/menu-item": {
+            "get": {
+                "tags": [
+                    "MenuItems"
+                ],
+                "summary": "Get list of MenuItem",
+                "description": "Returns list of MenuItem",
+                "operationId": "indexMenuItem",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuItems"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "MenuItems"
+                ],
+                "summary": "Insert a new MenuItem",
+                "description": "Insert a new MenuItem",
+                "operationId": "storeMenuItem",
+                "requestBody": {
+                    "description": "MenuItem to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/MenuItem"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "MenuItem created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/MenuItem"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/api/menu-item/{menuitem_id}": {
+            "get": {
+                "tags": [
+                    "MenuItems"
+                ],
+                "summary": "Show a MenuItem from his Id",
+                "description": "Show a MenuItem from his Id",
+                "operationId": "showMenuItem",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/MenuItem--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/MenuItem"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "MenuItem not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "MenuItems"
+                ],
+                "summary": "Delete a MenuItem",
+                "description": "Delete a MenuItem",
+                "operationId": "destroyMenuItem",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/MenuItem--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/MenuItem"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No content"
+                    },
+                    "404": {
+                        "description": "MenuItem not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "MenuItems"
+                ],
+                "summary": "Update an existing MenuItem",
+                "description": "Update an existing MenuItem",
+                "operationId": "updateMenuItem",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/MenuItem--id"
+                    }
+                ],
+                "requestBody": {
+                    "description": "MenuItem to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/MenuItem"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/MenuItem"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "MenuItem not found"
+                    }
+                }
+            }
+        },
+        "/api/menu-type": {
+            "get": {
+                "tags": [
+                    "MenuTypes"
+                ],
+                "summary": "Get list of MenuType",
+                "description": "Returns list of MenuType",
+                "operationId": "indexMenuType",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuTypes"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "MenuTypes"
+                ],
+                "summary": "Insert a new MenuType",
+                "description": "Insert a new MenuType",
+                "operationId": "storeMenuType",
+                "requestBody": {
+                    "description": "MenuType to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/MenuType"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "MenuType created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/MenuType"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/api/menu-type/{menutype_id}": {
+            "get": {
+                "tags": [
+                    "MenuTypes"
+                ],
+                "summary": "Show a MenuType from his Id",
+                "description": "Show a MenuType from his Id",
+                "operationId": "showMenuType",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/MenuType--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/MenuType"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "MenuType not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "MenuTypes"
+                ],
+                "summary": "Delete a MenuType",
+                "description": "Delete a MenuType",
+                "operationId": "destroyMenuType",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/MenuType--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/MenuType"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No content"
+                    },
+                    "404": {
+                        "description": "MenuType not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "MenuTypes"
+                ],
+                "summary": "Update an existing MenuType",
+                "description": "Update an existing MenuType",
+                "operationId": "updateMenuType",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/MenuType--id"
+                    }
+                ],
+                "requestBody": {
+                    "description": "MenuType to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/MenuType"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/MenuType"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "MenuType not found"
+                    }
+                }
+            }
+        },
+        "/api/order-column": {
+            "get": {
+                "tags": [
+                    "OrderColumns"
+                ],
+                "summary": "Get list of OrderColumn",
+                "description": "Returns list of OrderColumn",
+                "operationId": "indexOrderColumn",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderColumns"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "OrderColumns"
+                ],
+                "summary": "Insert a new OrderColumn",
+                "description": "Insert a new OrderColumn",
+                "operationId": "storeOrderColumn",
+                "requestBody": {
+                    "description": "OrderColumn to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/OrderColumn"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OrderColumn created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrderColumn"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/api/order-column/{ordercolumn_id}": {
+            "get": {
+                "tags": [
+                    "OrderColumns"
+                ],
+                "summary": "Show a OrderColumn from his Id",
+                "description": "Show a OrderColumn from his Id",
+                "operationId": "showOrderColumn",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/OrderColumn--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrderColumn"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "OrderColumn not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "OrderColumns"
+                ],
+                "summary": "Delete a OrderColumn",
+                "description": "Delete a OrderColumn",
+                "operationId": "destroyOrderColumn",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/OrderColumn--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrderColumn"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No content"
+                    },
+                    "404": {
+                        "description": "OrderColumn not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "OrderColumns"
+                ],
+                "summary": "Update an existing OrderColumn",
+                "description": "Update an existing OrderColumn",
+                "operationId": "updateOrderColumn",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/OrderColumn--id"
+                    }
+                ],
+                "requestBody": {
+                    "description": "OrderColumn to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/OrderColumn"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrderColumn"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "OrderColumn not found"
+                    }
+                }
+            }
+        },
+        "/api/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get list of Order",
+                "description": "Returns list of Order",
+                "operationId": "indexOrder",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Orders"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Insert a new Order",
+                "description": "Insert a new Order",
+                "operationId": "storeOrder",
+                "requestBody": {
+                    "description": "Order to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Order"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Order created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Order"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/api/orders/{order_id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Show a Order from his Id",
+                "description": "Show a Order from his Id",
+                "operationId": "showOrder",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Order--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Order"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Delete a Order",
+                "description": "Delete a Order",
+                "operationId": "destroyOrder",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Order--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Order"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No content"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Update an existing Order",
+                "description": "Update an existing Order",
+                "operationId": "updateOrder",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Order--id"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Order to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Order"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Order"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                }
+            }
+        },
+        "/api/order-item": {
+            "get": {
+                "tags": [
+                    "OrderItems"
+                ],
+                "summary": "Get list of OrderItem",
+                "description": "Returns list of OrderItem",
+                "operationId": "indexOrderItem",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OrderItems"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "OrderItems"
+                ],
+                "summary": "Insert a new OrderItem",
+                "description": "Insert a new OrderItem",
+                "operationId": "storeOrderItem",
+                "requestBody": {
+                    "description": "OrderItem to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/OrderItem"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OrderItem created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrderItem"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/api/order-item/{orderitem_id}": {
+            "get": {
+                "tags": [
+                    "OrderItems"
+                ],
+                "summary": "Show a OrderItem from his Id",
+                "description": "Show a OrderItem from his Id",
+                "operationId": "showOrderItem",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/OrderItem--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrderItem"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "OrderItem not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "OrderItems"
+                ],
+                "summary": "Delete a OrderItem",
+                "description": "Delete a OrderItem",
+                "operationId": "destroyOrderItem",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/OrderItem--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrderItem"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No content"
+                    },
+                    "404": {
+                        "description": "OrderItem not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "OrderItems"
+                ],
+                "summary": "Update an existing OrderItem",
+                "description": "Update an existing OrderItem",
+                "operationId": "updateOrderItem",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/OrderItem--id"
+                    }
+                ],
+                "requestBody": {
+                    "description": "OrderItem to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/OrderItem"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrderItem"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "OrderItem not found"
+                    }
+                }
+            }
+        },
+        "/api/staff": {
+            "get": {
+                "tags": [
+                    "Staffs"
+                ],
+                "summary": "Get list of Staff",
+                "description": "Returns list of Staff",
+                "operationId": "indexStaff",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Staffs"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Staffs"
+                ],
+                "summary": "Insert a new Staff",
+                "description": "Insert a new Staff",
+                "operationId": "storeStaff",
+                "requestBody": {
+                    "description": "Staff to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Staff"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Staff created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Staff"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/api/staff/{staff_id}": {
+            "get": {
+                "tags": [
+                    "Staffs"
+                ],
+                "summary": "Show a Staff from his Id",
+                "description": "Show a Staff from his Id",
+                "operationId": "showStaff",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Staff--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Staff"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Staff not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Staffs"
+                ],
+                "summary": "Delete a Staff",
+                "description": "Delete a Staff",
+                "operationId": "destroyStaff",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Staff--id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Staff"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No content"
+                    },
+                    "404": {
+                        "description": "Staff not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Staffs"
+                ],
+                "summary": "Update an existing Staff",
+                "description": "Update an existing Staff",
+                "operationId": "updateStaff",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Staff--id"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Staff to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Staff"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Staff"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Staff not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "MenuItem": {
+                "title": "MenuItem",
+                "description": "MenuItem model",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of MenuItem",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of MenuItem",
+                        "type": "string",
+                        "example": "Macbook Pro"
+                    },
+                    "sku": {
+                        "title": "sku",
+                        "description": "sku of MenuItem",
+                        "type": "string",
+                        "example": "MCBPRO2022"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "price of MenuItem",
+                        "type": "integer",
+                        "example": "99"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    }
+                },
+                "type": "object"
+            },
+            "MenuItems": {
+                "title": "MenuItems list",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MenuItem"
+                        }
+                    },
+                    "first_page_url": {
+                        "title": "first_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=1"
+                    },
+                    "last_page_url": {
+                        "title": "last_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=3"
+                    },
+                    "prev_page_url": {
+                        "title": "prev_page_url",
+                        "type": "string",
+                        "example": "null"
+                    },
+                    "next_page_url": {
+                        "title": "next_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=2"
+                    },
+                    "current_page": {
+                        "title": "current_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "from": {
+                        "title": "from",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "last_page": {
+                        "title": "last_page",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "path": {
+                        "title": "path",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers"
+                    },
+                    "per_page": {
+                        "title": "per_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "total": {
+                        "title": "total",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "links": {
+                        "title": "links",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "url": {
+                                    "title": "url",
+                                    "type": "string",
+                                    "example": "http://localhost:8080/api/merchant-customers?page=2"
+                                },
+                                "label": {
+                                    "title": "label",
+                                    "type": "string",
+                                    "example": "1"
+                                },
+                                "active": {
+                                    "title": "active",
+                                    "type": "boolean",
+                                    "example": "true"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "MenuType": {
+                "title": "MenuType",
+                "description": "MenuType model",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of MenuType",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of MenuType",
+                        "type": "string",
+                        "example": "Macbook Pro"
+                    },
+                    "sku": {
+                        "title": "sku",
+                        "description": "sku of MenuType",
+                        "type": "string",
+                        "example": "MCBPRO2022"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "price of MenuType",
+                        "type": "integer",
+                        "example": "99"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    }
+                },
+                "type": "object"
+            },
+            "MenuTypes": {
+                "title": "MenuTypes list",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MenuType"
+                        }
+                    },
+                    "first_page_url": {
+                        "title": "first_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=1"
+                    },
+                    "last_page_url": {
+                        "title": "last_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=3"
+                    },
+                    "prev_page_url": {
+                        "title": "prev_page_url",
+                        "type": "string",
+                        "example": "null"
+                    },
+                    "next_page_url": {
+                        "title": "next_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=2"
+                    },
+                    "current_page": {
+                        "title": "current_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "from": {
+                        "title": "from",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "last_page": {
+                        "title": "last_page",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "path": {
+                        "title": "path",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers"
+                    },
+                    "per_page": {
+                        "title": "per_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "total": {
+                        "title": "total",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "links": {
+                        "title": "links",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "url": {
+                                    "title": "url",
+                                    "type": "string",
+                                    "example": "http://localhost:8080/api/merchant-customers?page=2"
+                                },
+                                "label": {
+                                    "title": "label",
+                                    "type": "string",
+                                    "example": "1"
+                                },
+                                "active": {
+                                    "title": "active",
+                                    "type": "boolean",
+                                    "example": "true"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Order": {
+                "title": "Order",
+                "description": "Order model",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of Order",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of Order",
+                        "type": "string",
+                        "example": "Macbook Pro"
+                    },
+                    "sku": {
+                        "title": "sku",
+                        "description": "sku of Order",
+                        "type": "string",
+                        "example": "MCBPRO2022"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "price of Order",
+                        "type": "integer",
+                        "example": "99"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Orders": {
+                "title": "Orders list",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Order"
+                        }
+                    },
+                    "first_page_url": {
+                        "title": "first_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=1"
+                    },
+                    "last_page_url": {
+                        "title": "last_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=3"
+                    },
+                    "prev_page_url": {
+                        "title": "prev_page_url",
+                        "type": "string",
+                        "example": "null"
+                    },
+                    "next_page_url": {
+                        "title": "next_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=2"
+                    },
+                    "current_page": {
+                        "title": "current_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "from": {
+                        "title": "from",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "last_page": {
+                        "title": "last_page",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "path": {
+                        "title": "path",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers"
+                    },
+                    "per_page": {
+                        "title": "per_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "total": {
+                        "title": "total",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "links": {
+                        "title": "links",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "url": {
+                                    "title": "url",
+                                    "type": "string",
+                                    "example": "http://localhost:8080/api/merchant-customers?page=2"
+                                },
+                                "label": {
+                                    "title": "label",
+                                    "type": "string",
+                                    "example": "1"
+                                },
+                                "active": {
+                                    "title": "active",
+                                    "type": "boolean",
+                                    "example": "true"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "OrderColumn": {
+                "title": "OrderColumn",
+                "description": "OrderColumn model",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of OrderColumn",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of OrderColumn",
+                        "type": "string",
+                        "example": "Macbook Pro"
+                    },
+                    "sku": {
+                        "title": "sku",
+                        "description": "sku of OrderColumn",
+                        "type": "string",
+                        "example": "MCBPRO2022"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "price of OrderColumn",
+                        "type": "integer",
+                        "example": "99"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderColumns": {
+                "title": "OrderColumns list",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OrderColumn"
+                        }
+                    },
+                    "first_page_url": {
+                        "title": "first_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=1"
+                    },
+                    "last_page_url": {
+                        "title": "last_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=3"
+                    },
+                    "prev_page_url": {
+                        "title": "prev_page_url",
+                        "type": "string",
+                        "example": "null"
+                    },
+                    "next_page_url": {
+                        "title": "next_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=2"
+                    },
+                    "current_page": {
+                        "title": "current_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "from": {
+                        "title": "from",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "last_page": {
+                        "title": "last_page",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "path": {
+                        "title": "path",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers"
+                    },
+                    "per_page": {
+                        "title": "per_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "total": {
+                        "title": "total",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "links": {
+                        "title": "links",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "url": {
+                                    "title": "url",
+                                    "type": "string",
+                                    "example": "http://localhost:8080/api/merchant-customers?page=2"
+                                },
+                                "label": {
+                                    "title": "label",
+                                    "type": "string",
+                                    "example": "1"
+                                },
+                                "active": {
+                                    "title": "active",
+                                    "type": "boolean",
+                                    "example": "true"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "OrderItem": {
+                "title": "OrderItem",
+                "description": "OrderItem model",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of OrderItem",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of OrderItem",
+                        "type": "string",
+                        "example": "Macbook Pro"
+                    },
+                    "sku": {
+                        "title": "sku",
+                        "description": "sku of OrderItem",
+                        "type": "string",
+                        "example": "MCBPRO2022"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "price of OrderItem",
+                        "type": "integer",
+                        "example": "99"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderItems": {
+                "title": "OrderItems list",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OrderItem"
+                        }
+                    },
+                    "first_page_url": {
+                        "title": "first_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=1"
+                    },
+                    "last_page_url": {
+                        "title": "last_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=3"
+                    },
+                    "prev_page_url": {
+                        "title": "prev_page_url",
+                        "type": "string",
+                        "example": "null"
+                    },
+                    "next_page_url": {
+                        "title": "next_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=2"
+                    },
+                    "current_page": {
+                        "title": "current_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "from": {
+                        "title": "from",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "last_page": {
+                        "title": "last_page",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "path": {
+                        "title": "path",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers"
+                    },
+                    "per_page": {
+                        "title": "per_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "total": {
+                        "title": "total",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "links": {
+                        "title": "links",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "url": {
+                                    "title": "url",
+                                    "type": "string",
+                                    "example": "http://localhost:8080/api/merchant-customers?page=2"
+                                },
+                                "label": {
+                                    "title": "label",
+                                    "type": "string",
+                                    "example": "1"
+                                },
+                                "active": {
+                                    "title": "active",
+                                    "type": "boolean",
+                                    "example": "true"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Staff": {
+                "title": "Staff",
+                "description": "Staff model",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of Staff",
+                        "type": "integer",
+                        "readOnly": "true",
+                        "example": "1"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of Staff",
+                        "type": "string",
+                        "example": "Macbook Pro"
+                    },
+                    "sku": {
+                        "title": "sku",
+                        "description": "sku of Staff",
+                        "type": "string",
+                        "example": "MCBPRO2022"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "price of Staff",
+                        "type": "integer",
+                        "example": "99"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "type": "dateTime",
+                        "readOnly": "true",
+                        "example": "2022-07-04T02:41:42.336Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Staffs": {
+                "title": "Staffs list",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Staff"
+                        }
+                    },
+                    "first_page_url": {
+                        "title": "first_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=1"
+                    },
+                    "last_page_url": {
+                        "title": "last_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=3"
+                    },
+                    "prev_page_url": {
+                        "title": "prev_page_url",
+                        "type": "string",
+                        "example": "null"
+                    },
+                    "next_page_url": {
+                        "title": "next_page_url",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers?page=2"
+                    },
+                    "current_page": {
+                        "title": "current_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "from": {
+                        "title": "from",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "last_page": {
+                        "title": "last_page",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "path": {
+                        "title": "path",
+                        "type": "string",
+                        "example": "http://localhost:8080/api/merchant-customers"
+                    },
+                    "per_page": {
+                        "title": "per_page",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "total": {
+                        "title": "total",
+                        "type": "integer",
+                        "example": "3"
+                    },
+                    "links": {
+                        "title": "links",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "url": {
+                                    "title": "url",
+                                    "type": "string",
+                                    "example": "http://localhost:8080/api/merchant-customers?page=2"
+                                },
+                                "label": {
+                                    "title": "label",
+                                    "type": "string",
+                                    "example": "1"
+                                },
+                                "active": {
+                                    "title": "active",
+                                    "type": "boolean",
+                                    "example": "true"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "MenuItem--id": {
+                "name": "MenuItem_id",
+                "in": "path",
+                "description": "Id of MenuItem",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": "1"
+                }
+            },
+            "MenuType--id": {
+                "name": "MenuType_id",
+                "in": "path",
+                "description": "Id of MenuType",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": "1"
+                }
+            },
+            "Order--id": {
+                "name": "Order_id",
+                "in": "path",
+                "description": "Id of Order",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": "1"
+                }
+            },
+            "OrderColumn--id": {
+                "name": "OrderColumn_id",
+                "in": "path",
+                "description": "Id of OrderColumn",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": "1"
+                }
+            },
+            "OrderItem--id": {
+                "name": "OrderItem_id",
+                "in": "path",
+                "description": "Id of OrderItem",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": "1"
+                }
+            },
+            "Staff--id": {
+                "name": "Staff_id",
+                "in": "path",
+                "description": "Id of Staff",
+                "required": true,
+                "schema": {
+                    "type": "integer",
+                    "example": "1"
+                }
+            }
+        }
+    }
+}

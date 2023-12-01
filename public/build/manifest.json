@@ -1,0 +1,23 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-b875d61e.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/Pages/Auth/Register.vue": {
+    "file": "assets/Register-593ab0b8.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/Pages/Auth/Register.vue"
+  },
+  "resources/js/app.js": {
+    "dynamicImports": [
+      "resources/js/Pages/Auth/Register.vue"
+    ],
+    "file": "assets/app-c2180195.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
