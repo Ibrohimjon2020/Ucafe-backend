@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMenuItemRequest;
@@ -84,10 +85,9 @@ class MenuItemController extends \App\Http\Controllers\Controller
      * @return array|Builder|Collection|MenuItem|Builder[]|MenuItem[]
      * @throws Throwable
      */
-    public function store(StoreMenuItemRequest $request): array|Builder|Collection|MenuItem
+    public function store(StoreMenuItemRequest $request): array|Builder|Collection|MenuItem|JsonResponse
     {
         return $this->service->createModel($request->validated());
-
     }
 
     /**
@@ -165,10 +165,9 @@ class MenuItemController extends \App\Http\Controllers\Controller
      * @return array|Builder|Builder[]|Collection|MenuItem|MenuItem[]
      * @throws Throwable
      */
-    public function update(UpdateMenuItemRequest $request,int $productId): array|MenuItem|Collection|Builder
+    public function update(UpdateMenuItemRequest $request, int $productId): array|MenuItem|Collection|Builder
     {
-        return $this->service->updateModel($request->validated(),$productId);
-
+        return $this->service->updateModel($request->validated(), $productId);
     }
 
     /**
