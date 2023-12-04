@@ -37,7 +37,7 @@ class BaseService
     {
         if (auth()->user()->can('create', $this->repository->getModel()))
             return $this->getRepository()->create($data);
-        else return $this->permissionDenied();
+        else return self::permissionDenied();
     }
 
     /**
@@ -58,7 +58,9 @@ class BaseService
      */
     public function updateModel($data, $id): array |Collection|Builder|Model|null
     {
-        return $this->getRepository()->update($data, $id);
+        if (auth()->user()->can('update', $this->repository->getModel()))
+            return $this->getRepository()->update($data, $id);
+        else return self::permissionDenied();
     }
 
     /**
@@ -68,7 +70,9 @@ class BaseService
      */
     public function deleteModel($id): array |Builder|Collection|Model
     {
-        return $this->getRepository()->delete($id);
+        if (auth()->user()->can('delete', $this->repository->getModel()))
+            return $this->getRepository()->delete($id);
+        else return self::permissionDenied();
     }
 
     /**
@@ -80,7 +84,7 @@ class BaseService
     {
         return $this->getRepository()->findById($id);
     }
-    public function permissionDenied()
+    public static function permissionDenied()
     {
         return response()->json([
             'message' => 'Permission denied'

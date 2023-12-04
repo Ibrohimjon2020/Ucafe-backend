@@ -16,36 +16,36 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // Role::create([
-        //     'title' => [
-        //         'uz' => 'Administrator',
-        //         'ru' => 'Администратор',
-        //         'en' => 'Administrator'
-        //     ]
-        // ]);
-        // Role::create([
-        //     'title' => [
-        //         'uz' => 'Waiter',
-        //         'ru' => 'Официант',
-        //         'en' => 'Waiter'
-        //     ]
-        // ]);
+        Role::create([
+            'title' => [
+                'uz' => 'Administrator',
+                'ru' => 'Администратор',
+                'en' => 'Administrator'
+            ]
+        ]);
+        Role::create([
+            'title' => [
+                'uz' => 'Waiter',
+                'ru' => 'Официант',
+                'en' => 'Waiter'
+            ]
+        ]);
 
-        // Role::create([
-        //     'title' => [
-        //         'uz' => 'Kuryer',
-        //         'ru' => 'Курьер',
-        //         'en' => 'Carrier'
-        //     ]
-        // ]);
+        Role::create([
+            'title' => [
+                'uz' => 'Kuryer',
+                'ru' => 'Курьер',
+                'en' => 'Carrier'
+            ]
+        ]);
 
-        // Role::create([
-        //     'title' => [
-        //         'uz' => 'Barista',
-        //         'ru' => 'Бариста',
-        //         'en' => 'Barista'
-        //     ]
-        // ]);
+        Role::create([
+            'title' => [
+                'uz' => 'Barista',
+                'ru' => 'Бариста',
+                'en' => 'Barista'
+            ]
+        ]);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Super user',

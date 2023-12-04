@@ -1,15 +1,20 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStaffRequest;
 use App\Http\Requests\UpdateStaffRequest;
+use App\Models\Role;
 use App\Models\Staff;
+use App\Models\User;
+use App\Services\BaseService;
 use App\Services\StaffService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 use Throwable;
 
 /**
@@ -18,12 +23,7 @@ use Throwable;
  */
 class StaffController extends \App\Http\Controllers\Controller
 {
-    private StaffService $service;
 
-    public function __construct(StaffService $service)
-    {
-        $this->service = $service;
-    }
 
     /**
      * @OA\Get(
@@ -41,9 +41,10 @@ class StaffController extends \App\Http\Controllers\Controller
      * @return LengthAwarePaginator
      * @throws Throwable
      */
-    public function index(): LengthAwarePaginator
+    public function index()
     {
-        return $this->service->paginatedList();
+        if (auth()->user()->hasRoles('Administrator'))
+            return User::whereHas('roles')->with('roles')->get();
     }
 
     /**
@@ -80,14 +81,21 @@ class StaffController extends \App\Http\Controllers\Controller
      *  @OA\Response(response=422,description="Validation exception"),
      * )
      *
-     * @param StoreStaffRequest $request
-     * @return array|Builder|Collection|Staff|Builder[]|Staff[]
-     * @throws Throwable
      */
-    public function store(StoreStaffRequest $request): array|Builder|Collection|Staff
+    public function store(StoreStaffRequest $request)
     {
-        return $this->service->createModel($request->validated());
-
+        if (auth()->user()->hasRoles('Administrator')) {
+            $staff = new User();
+            $staff->name = $request->name;
+            $staff->login = $request->login;
+            $staff->staff_status = $request->status ?? false;
+            $staff->password = Hash::make($request->login);
+            $staff->save();
+            $role = Role::whereId($request->role)->firstOrFail();
+            $staff->giveRole($role->title['en']);
+            return response()->json($staff, 201);
+        } else return BaseService::permissionDenied();
+        // return $this->service->createModel($request->validated());
     }
 
     /**
@@ -119,7 +127,7 @@ class StaffController extends \App\Http\Controllers\Controller
      */
     public function show($productId): Model
     {
-        return $this->service->getModelById($productId);
+        // return $this->service->getModelById($productId);
     }
 
     /**
@@ -165,10 +173,9 @@ class StaffController extends \App\Http\Controllers\Controller
      * @return array|Builder|Builder[]|Collection|Staff|Staff[]
      * @throws Throwable
      */
-    public function update(UpdateStaffRequest $request,int $productId): array|Staff|Collection|Builder
+    public function update(UpdateStaffRequest $request, int $productId): array|Staff|Collection|Builder
     {
-        return $this->service->updateModel($request->validated(),$productId);
-
+        // return $this->service->updateModel($request->validated(), $productId);
     }
 
     /**
@@ -201,6 +208,6 @@ class StaffController extends \App\Http\Controllers\Controller
      */
     public function destroy(int $productId): array|Builder|Collection|Staff
     {
-        return $this->service->deleteModel($productId);
+        // return $this->service->deleteModel($productId);
     }
 }

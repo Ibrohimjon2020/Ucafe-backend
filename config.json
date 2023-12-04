@@ -74,5 +74,14 @@
         },
         "created": true,
         "delete": false
+    },
+    {
+        "name": "Role",
+        "path": "roles",
+        "fields": {
+            "title": "json,array|required"
+        },
+        "created": true,
+        "delete": false
     }
 ]

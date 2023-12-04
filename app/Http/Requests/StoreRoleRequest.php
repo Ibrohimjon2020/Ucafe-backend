@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Staff;
+use App\Models\Role;
 
-class StoreStaffRequest extends FormRequest
+class StoreRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,8 @@ class StoreStaffRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        // return Auth::check();
+        return true;
     }
 
     /**
@@ -25,12 +26,6 @@ class StoreStaffRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required|string',
-            'password' => 'required|string',
-            'login' => 'required|unique:users,login',
-            'role' => 'required|numeric',
-            'status' => 'boolean|nullable'
-        ];
+        return Role::$rules;
     }
 }
