@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order-column', function (Blueprint $table) {
+        Schema::create('order_column', function (Blueprint $table) {
             $table->id();
             $table->json('title');
             $table->timestamps();

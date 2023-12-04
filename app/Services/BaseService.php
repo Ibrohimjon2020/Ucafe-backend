@@ -7,6 +7,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
 use Throwable;
 
 class BaseService
@@ -32,9 +33,11 @@ class BaseService
      * @return Model|Model[]|Builder|Builder[]|Collection|null
      * @throws Throwable
      */
-    public function createModel($data): array |Collection|Builder|Model|null
+    public function createModel($data): array |Collection|Builder|Model|null|JsonResponse
     {
-        return $this->getRepository()->create($data);
+        if (auth()->user()->can('create', $this->repository->getModel()))
+            return $this->getRepository()->create($data);
+        else return $this->permissionDenied();
     }
 
     /**
@@ -76,5 +79,11 @@ class BaseService
     public function getModelById($id): Model|array |Collection|Builder|null
     {
         return $this->getRepository()->findById($id);
+    }
+    public function permissionDenied()
+    {
+        return response()->json([
+            'message' => 'Permission denied'
+        ], 403);
     }
 }

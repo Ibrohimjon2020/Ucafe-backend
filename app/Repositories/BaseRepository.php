@@ -41,7 +41,7 @@ class BaseRepository
      * @return Model
      * @throws Throwable
      */
-    protected function getModel(): Model
+    public function getModel(): Model
     {
         return $this->modelClass;
     }
@@ -101,20 +101,8 @@ class BaseRepository
         $model = $this->query()->whereId($id)->first();
 
         foreach ($data as $item => $value) {
-            if (!in_array($item, $model->translatable)) {
-                $model->{$item} = $value;
-                continue;
-            }
-            if (is_array($value)) {
-                foreach (['uz', 'ru', 'en', 'kiril'] as $lang) {
-                    app()->setLocale($lang);
-                    if (!isset($value[$lang])) $lang = 'uz';
 
-                    $model->{$item} = $value[$lang];
-                }
-            } else {
-                $model->{$item} = $value;
-            }
+            $model->{$item} = $value;
         }
         $model->save();
         return $model;
