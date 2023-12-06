@@ -1,27 +1,22 @@
-<?php 
+<?php
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 
 class Expense extends Model
 {
-    protected $fillable = ['day','price','text'];    
+    use HasFactory;
+    protected $fillable = ['day','price','text'];
+
+    protected $casts = [
+        'day'=>'date'
+    ];
+    // public static $rules = [
+    //     "day"=>'array|required',
+    //     "price"=>'numeric|required',
+    //     "text"=>'string|nullable',
+    // ];
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

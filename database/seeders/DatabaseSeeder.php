@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Super user',
-            'email' => 'admin@admin.com',
+            'email' => 'ddd',
             'phone_number' => '901234569',
             'login' => 'megaadmin'
         ]);
