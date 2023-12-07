@@ -13,10 +13,5 @@ class Expense extends Model
     protected $casts = [
         'day'=>'date'
     ];
-    // public static $rules = [
-    //     "day"=>'array|required',
-    //     "price"=>'numeric|required',
-    //     "text"=>'string|nullable',
-    // ];
 
 }

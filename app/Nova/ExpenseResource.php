@@ -9,12 +9,12 @@ use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Expense extends Resource
+class ExpenseResource extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Expense>
+     * @var class-string<\App\Models\ExpenseResource>
      */
     public static $model = \App\Models\Expense::class;
 
@@ -93,5 +93,10 @@ class Expense extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function label()
+    {
+        return 'Expense';
     }
 }
