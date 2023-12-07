@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('day'); // Use the date method for the 'day' field
             $table->decimal('price', 8, 2); // Assuming you want a decimal for price, adjust as needed
-            $table->string('text');
+            $table->string('decription');
 
             $table->timestamps();
         });
