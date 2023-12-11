@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('day');
             $table->unsignedBigInteger('price');
-            $table->text('decription');
+            $table->text('description');
             $table->timestamps();
         });
     }

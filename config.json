@@ -90,7 +90,7 @@
         "fields": {
             "day": "dateTime,string|nullable",
             "price": "unsignedBigInteger,numeric|required",
-            "decription": "text,string|required"
+            "description": "text,string|required"
         },
         "created": true,
         "delete": false
