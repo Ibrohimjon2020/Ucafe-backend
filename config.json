@@ -1,1 +1,98 @@
-[{"name":"MenuType","path":"menu-type","fields":{"title":"json,array|required","logo":"string,string|nullable"},"created":true,"delete":false},{"name":"MenuItem","path":"menu-item","fields":{"title":"json,array|required","image":"string,string|nullable","quantity":"unsignedInteger,numeric|required","price":"unsignedBigInteger,numeric|required","status":"boolean,boolean|required"},"created":true,"delete":false},{"name":"Staff","path":"staff","fields":{"tour_id":"unsignedBigInteger,numeric|required","people_count":"unsignedInteger,numeric|required","data":"json,array"},"created":true,"delete":false},{"name":"Order","path":"orders","fields":{"title":"string,string|required","description":"text,string|required","image":"string,string|nullable","company_id":"foreignId,numeric|nullable","created_by":"foreignId,numeric|nullable","updated_by":"foreignId,numeric|nullable","deleted_by":"foreignId,numeric|nullable"},"created":true,"delete":false},{"name":"OrderItem","path":"order-item","fields":{"price":"unsignedBigInteger,numeric|required","discount_price":"unsignedBigInteger,numeric|nullable","course_id":"foreignId,numeric|nullable","active":"boolean,boolean|required","active_from":"dateTime,string|nullable","active_till":"dateTime,string|nullable","discount_price_active_till":"dateTime,string|nullable","created_by":"foreignId,numeric|nullable","updated_by":"foreignId,numeric|nullable","deleted_by":"foreignId,numeric|nullable"},"created":true,"delete":false},{"name":"OrderColumn","path":"order-column","fields":{"title":"json,array|required"},"created":true,"delete":false},{"name":"Role","path":"roles","fields":{"title":"json,array|required"},"created":true,"delete":false},{"name":"Expense","path":"expenses","fields":{"day":"dateTime,array|required","price":"unsignedBigInteger,numeric|required","decription":"text,string|required"},"created":true,"delete":false}]
+[
+    {
+        "name": "MenuType",
+        "path": "menu-type",
+        "fields": {
+            "title": "json,array|required",
+            "logo": "string,string|nullable"
+        },
+        "created": true,
+        "delete": false
+    },
+    {
+        "name": "MenuItem",
+        "path": "menu-item",
+        "fields": {
+            "title": "json,array|required",
+            "image": "string,string|nullable",
+            "quantity": "unsignedInteger,numeric|required",
+            "price": "unsignedBigInteger,numeric|required",
+            "status": "boolean,boolean|required"
+        },
+        "created": true,
+        "delete": false
+    },
+    {
+        "name": "Staff",
+        "path": "staff",
+        "fields": {
+            "tour_id": "unsignedBigInteger,numeric|required",
+            "people_count": "unsignedInteger,numeric|required",
+            "data": "json,array"
+        },
+        "created": true,
+        "delete": false
+    },
+    {
+        "name": "Order",
+        "path": "orders",
+        "fields": {
+            "title": "string,string|required",
+            "description": "text,string|required",
+            "image": "string,string|nullable",
+            "company_id": "foreignId,numeric|nullable",
+            "created_by": "foreignId,numeric|nullable",
+            "updated_by": "foreignId,numeric|nullable",
+            "deleted_by": "foreignId,numeric|nullable"
+        },
+        "created": true,
+        "delete": false
+    },
+    {
+        "name": "OrderItem",
+        "path": "order-item",
+        "fields": {
+            "price": "unsignedBigInteger,numeric|required",
+            "discount_price": "unsignedBigInteger,numeric|nullable",
+            "course_id": "foreignId,numeric|nullable",
+            "active": "boolean,boolean|required",
+            "active_from": "dateTime,string|nullable",
+            "active_till": "dateTime,string|nullable",
+            "discount_price_active_till": "dateTime,string|nullable",
+            "created_by": "foreignId,numeric|nullable",
+            "updated_by": "foreignId,numeric|nullable",
+            "deleted_by": "foreignId,numeric|nullable"
+        },
+        "created": true,
+        "delete": false
+    },
+    {
+        "name": "OrderColumn",
+        "path": "order-column",
+        "fields": {
+            "title": "json,array|required"
+        },
+        "created": true,
+        "delete": false
+    },
+    {
+        "name": "Role",
+        "path": "roles",
+        "fields": {
+            "title": "json,array|required"
+        },
+        "created": true,
+        "delete": false
+    },
+    {
+        "name": "Expense",
+        "path": "expenses",
+        "fields": {
+            "day": "dateTime,array|required",
+            "price": "unsignedBigInteger,numeric|required",
+            "decription": "text,string|required"
+        },
+        "created": true,
+        "delete": false
+    }
+]
