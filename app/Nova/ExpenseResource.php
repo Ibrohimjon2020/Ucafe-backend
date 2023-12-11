@@ -46,7 +46,7 @@ class ExpenseResource extends Resource
             ID::make()->sortable(),
             Date::make('Day')->sortable(),
             Currency::make('Price')->sortable(),
-            Text::make('Decription')->sortable(),
+            Text::make('Description')->sortable(),
 
         ];
     }
