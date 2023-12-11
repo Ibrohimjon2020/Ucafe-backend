@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     OrderItemController,
     OrderColumnController,
     RoleController,
-    //imports
+    ExpenseController,
+//imports
 };
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('order-item', OrderItemController::class);
     Route::apiResource('order-column', OrderColumnController::class);
     Route::apiResource('roles', RoleController::class);
+    Route::apiResource('expenses', ExpenseController::class);
 //routes
 
 });

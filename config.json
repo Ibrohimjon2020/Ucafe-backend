@@ -83,5 +83,16 @@
         },
         "created": true,
         "delete": false
+    },
+    {
+        "name": "Expense",
+        "path": "expenses",
+        "fields": {
+            "day": "dateTime,string|nullable",
+            "price": "unsignedBigInteger,numeric|required",
+            "decription": "text,string|required"
+        },
+        "created": true,
+        "delete": false
     }
 ]
