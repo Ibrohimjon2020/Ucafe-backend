@@ -72,7 +72,7 @@ class Expense extends Model
         'day' => 'date'
     ];
     public static $rules = [
-        "day" => 'numeric|nullable',
+        "day" => 'string|nullable',
         "price" => 'numeric|required',
         "decription" => 'string|required',
     ];
