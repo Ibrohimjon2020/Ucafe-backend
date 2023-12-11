@@ -8,24 +8,27 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->date('day'); // Use the date method for the 'day' field
-            $table->decimal('price', 8, 2); // Assuming you want a decimal for price, adjust as needed
-            $table->string('decription');
-
+            $table->dateTime('day');
+            $table->unsignedBigInteger('price');
+            $table->text('decription');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('expense');
+        Schema::dropIfExists('expenses');
     }
 };
