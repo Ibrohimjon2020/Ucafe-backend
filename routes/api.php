@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     ExpenseController,
     OrderItemController,
     OrderController,
+    UploadFileController,
 //imports
 };
 use App\Http\Controllers\Auth\LoginController;
@@ -31,7 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login-staff', [LoginController::class, 'login']);
 
-// Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('menu-type', MenuTypeController::class);
     Route::apiResource('menu-item', MenuItemController::class);
     Route::apiResource('staff', StaffController::class);
@@ -42,4 +43,8 @@ Route::post('login-staff', [LoginController::class, 'login']);
     Route::apiResource('orders', OrderController::class);
 //routes
 
-// });
+});
+
+Route::post('upload-file', [UploadFileController::class, 'upload']);
+
+
