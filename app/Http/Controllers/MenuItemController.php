@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Throwable;
 
 /**
@@ -42,9 +43,9 @@ class MenuItemController extends \App\Http\Controllers\Controller
      * @return LengthAwarePaginator
      * @throws Throwable
      */
-    public function index(): LengthAwarePaginator
+    public function index(Request $request): LengthAwarePaginator
     {
-        return $this->service->paginatedList();
+        return $this->service->paginatedList($request->all());
     }
 
     /**

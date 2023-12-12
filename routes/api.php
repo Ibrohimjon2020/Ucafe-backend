@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     OrderColumnController,
     RoleController,
     ExpenseController,
+    UploadFileController,
 //imports
 };
 use App\Http\Controllers\Auth\LoginController;
@@ -43,3 +44,7 @@ Route::middleware('auth:sanctum')->group(function () {
 //routes
 
 });
+
+Route::post('upload-file', [UploadFileController::class, 'upload']);
+
+

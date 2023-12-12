@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -81,5 +82,11 @@ class MenuItem extends Model
     public function menu()
     {
         return $this->belongsTo(MenuType::class, 'menu_type_id');
+    }
+
+    public function scopeFilter(Builder $query, $data)
+    {
+        if (isset($data['type_id'])) $query->where('menu_type_id', $data['type_id']);
+        return $query;
     }
 }
