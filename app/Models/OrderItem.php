@@ -69,15 +69,9 @@ class OrderItem extends Model
 
     protected $casts = [];
     public static $rules = [
-        "price" => 'numeric|required',
-"discount_price" => 'numeric|nullable',
-"course_id" => 'numeric|nullable',
-"active" => 'boolean|required',
-"active_from" => 'string|nullable',
-"active_till" => 'string|nullable',
-"discount_price_active_till" => 'string|nullable',
-"created_by" => 'numeric|nullable',
-"updated_by" => 'numeric|nullable',
-"deleted_by" => 'numeric|nullable',
+        "product_id" => 'numeric|required',
+"price" => 'numeric|required',
+"quantity" => 'numeric|required',
+"order_id" => 'numeric|required',
     ];
 }

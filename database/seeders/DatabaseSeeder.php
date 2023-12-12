@@ -47,6 +47,14 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        Role::create([
+            'title' => [
+                'uz' => 'Yangi',
+                'ru' => 'Новый',
+                'en' => 'New'
+            ]
+        ]);
+
         $user = \App\Models\User::factory()->create([
             'name' => 'Super user',
             'email' => 'admin@admin.com',

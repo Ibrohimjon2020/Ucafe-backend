@@ -69,12 +69,10 @@ class Order extends Model
 
     protected $casts = [];
     public static $rules = [
-        "title" => 'string|required',
-"description" => 'string|required',
-"image" => 'string|nullable',
-"company_id" => 'numeric|nullable',
-"created_by" => 'numeric|nullable',
-"updated_by" => 'numeric|nullable',
-"deleted_by" => 'numeric|nullable',
+        "price" => 'numeric|required',
+"order_status" => 'string|required',
+"payment_status" => 'string|required',
+"payment_type" => 'string|required',
+"order_detail" => 'array',
     ];
 }
