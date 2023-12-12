@@ -7,8 +7,8 @@ use App\Http\Controllers\{
     OrderColumnController,
     RoleController,
     ExpenseController,
-    OrderController,
     OrderItemController,
+    OrderController,
 //imports
 };
 use App\Http\Controllers\Auth\LoginController;
@@ -31,15 +31,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login-staff', [LoginController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
+// Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('menu-type', MenuTypeController::class);
     Route::apiResource('menu-item', MenuItemController::class);
     Route::apiResource('staff', StaffController::class);
     Route::apiResource('order-column', OrderColumnController::class);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('expenses', ExpenseController::class);
-    Route::apiResource('orders', OrderController::class);
     Route::apiResource('order_items', OrderItemController::class);
+    Route::apiResource('orders', OrderController::class);
 //routes
 
-});
+// });

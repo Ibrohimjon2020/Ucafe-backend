@@ -66,11 +66,13 @@
         "name": "Order",
         "path": "orders",
         "fields": {
-            "price": "unsignedBigInteger,numeric|required",
+            "price": "unsignedBigInteger,numeric",
             "order_status": "text,string|required",
             "payment_status": "text,string|required",
             "payment_type": "text,string|required",
-            "order_detail": "json,array"
+            "order_detail": "json,array",
+            "employee_id": "unsignedBigInteger,numeric|required",
+            "user_id": "unsignedBigInteger,numeric"
         },
         "created": true,
         "delete": false

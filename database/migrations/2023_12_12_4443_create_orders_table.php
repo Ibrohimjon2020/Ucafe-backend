@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('payment_status');
             $table->text('payment_type');
             $table->json('order_detail');
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }
