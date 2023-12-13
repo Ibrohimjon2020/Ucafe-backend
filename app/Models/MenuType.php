@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -64,13 +65,21 @@ class MenuType extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['title','logo', 'order'];
 
     protected $casts = [
-        'title'=>'array'
+        'title' => 'array'
     ];
     public static $rules = [
         "title" => 'array|required',
         "logo" => 'string|nullable',
     ];
+
+    public function scopeFilter(Builder $query)
+    {
+        $query->orderBy('order', 'asc');
+
+
+        return $query;
+    }
 }
