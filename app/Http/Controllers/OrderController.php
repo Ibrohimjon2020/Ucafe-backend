@@ -84,7 +84,7 @@ class OrderController extends \App\Http\Controllers\Controller
      * @return array|Builder|Collection|Order|Builder[]|Order[]
      * @throws Throwable
      */
-    public function store(StoreOrderRequest $request): array|Builder|Collection|Order
+    public function store(StoreOrderRequest $request): JsonResponse|array|Builder|Collection|Order
     {
         return $this->service->createModel($request->validated());
 

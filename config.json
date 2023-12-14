@@ -71,7 +71,8 @@
             "payment_status": "text,string|required",
             "payment_type": "text,string|required",
             "order_detail": "json,array",
-            "employee_id": "unsignedBigInteger,numeric|required",
+            "created_by": "unsignedBigInteger,numeric",
+            "updated_by": "unsignedBigInteger,numeric",
             "user_id": "unsignedBigInteger,numeric"
         },
         "created": true,

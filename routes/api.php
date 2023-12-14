@@ -8,8 +8,8 @@ use App\Http\Controllers\{
     RoleController,
     ExpenseController,
     OrderItemController,
-    OrderController,
     UploadFileController,
+    OrderController,
 //imports
 };
 use App\Http\Controllers\Auth\LoginController;

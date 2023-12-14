@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Wildside\Userstamps\Userstamps;
 /**
  * @OA\Schema(
  *   description="Order model",
@@ -63,6 +63,11 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    use Userstamps;
+
+    const CREATED_BY = 'created_by';
+    const UPDATED_BY = 'updated_by';
+    const DELETED_BY = 'deleted_by';
 
     protected $fillable = [
     ];
@@ -73,8 +78,9 @@ class Order extends Model
         "order_status" => 'string|required',
         "payment_status" => 'string|required',
         "payment_type" => 'string|required',
-        "order_detail" => 'array',
-        "employee_id" => 'numeric|required',
+        "order_detail" => 'string',
+        "created_by" => 'numeric',
+        "updated_by" => 'numeric',
         "user_id" => 'numeric',
     ];
 }
