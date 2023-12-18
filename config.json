@@ -34,15 +34,6 @@
         "delete": false
     },
     {
-        "name": "OrderColumn",
-        "path": "order-column",
-        "fields": {
-            "title": "json,array|required"
-        },
-        "created": true,
-        "delete": false
-    },
-    {
         "name": "Role",
         "path": "roles",
         "fields": {
@@ -86,6 +77,24 @@
             "price": "unsignedBigInteger,numeric|required",
             "quantity": "unsignedInteger,numeric|required",
             "order_id": "unsignedBigInteger,numeric|required"
+        },
+        "created": true,
+        "delete": false
+    },
+    {
+        "name": "PaymentType",
+        "path": "payment_types",
+        "fields": {
+            "title": "json,array|required"
+        },
+        "created": true,
+        "delete": false
+    },
+    {
+        "name": "OrderColumn",
+        "path": "order_columns",
+        "fields": {
+            "title": "json,array|required"
         },
         "created": true,
         "delete": false

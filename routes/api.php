@@ -4,12 +4,13 @@ use App\Http\Controllers\{
     MenuItemController,
     MenuTypeController,
     StaffController,
-    OrderColumnController,
     RoleController,
     ExpenseController,
     OrderItemController,
     UploadFileController,
     OrderController,
+    PaymentTypeController,
+    OrderColumnController,
 //imports
 };
 use App\Http\Controllers\Auth\LoginController;
@@ -36,11 +37,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('menu-type', MenuTypeController::class);
     Route::apiResource('menu-item', MenuItemController::class);
     Route::apiResource('staff', StaffController::class);
-    Route::apiResource('order-column', OrderColumnController::class);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('expenses', ExpenseController::class);
     Route::apiResource('order_items', OrderItemController::class);
     Route::apiResource('orders', OrderController::class);
+    Route::apiResource('payment_types', PaymentTypeController::class);
+    Route::apiResource('order_columns', OrderColumnController::class);
 //routes
 
 });

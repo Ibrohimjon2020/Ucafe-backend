@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('price');
-            $table->text('order_status');
+            $table->foreignId('order_status')->constrained('order_columns');
             $table->text('payment_status');
-            $table->text('payment_type');
+            $table->foreignId('payment_type')->constrained('payment_types');
             $table->json('order_detail');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

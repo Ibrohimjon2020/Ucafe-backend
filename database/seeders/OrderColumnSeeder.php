@@ -1,8 +1,6 @@
 <?php
 
-namespace OrderColumn\Seeders;
-
-// use Illuminate\OrderColumn\Console\Seeds\WithoutModelEvents;
+namespace Database\Seeders;
 
 use App\Models\OrderColumn;
 use Illuminate\Database\Seeder;
@@ -14,7 +12,6 @@ class OrderColumnSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\OrderColumn::factory(10)->create();
         OrderColumn::create([
             'title' => [
                 'uz' => 'Yangi',

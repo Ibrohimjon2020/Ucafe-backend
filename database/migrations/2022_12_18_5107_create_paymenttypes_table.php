@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_column', function (Blueprint $table) {
+        Schema::create('payment_types', function (Blueprint $table) {
             $table->id();
             $table->json('title');
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order-column');
+        Schema::dropIfExists('payment_types');
     }
 };

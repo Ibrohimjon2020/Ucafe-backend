@@ -1,13 +1,13 @@
 {
     "info": {
         "_postman_id": "5a870d71-5e1d-4c63-8da8-09654602c43c",
-        "name": "OrderColumns",
+        "name": "PaymentTypes",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         "_exporter_id": "10783291"
     },
     "item": [
         {
-            "name": "get list of OrderColumns",
+            "name": "get list of PaymentTypes",
             "protocolProfileBehavior": {
                 "disabledSystemHeaders": {
                     "accept": true
@@ -33,13 +33,13 @@
                     }
                 ],
                 "url": {
-                    "raw": "{{domain}}/api/order_columns",
+                    "raw": "{{domain}}/api/payment_types",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order_columns"
+                        "payment_types"
                     ],
                     "query": [
                         {
@@ -53,7 +53,7 @@
             "response": []
         },
         {
-            "name": "delete one OrderColumn",
+            "name": "delete one PaymentType",
             "request": {
                 "auth": {
                     "type": "bearer",
@@ -68,20 +68,20 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                    "raw": "{{domain}}/api/order_columns/1",
+                    "raw": "{{domain}}/api/payment_types/1",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order_columns",
+                        "payment_types",
                         "1"
                     ]
                 }
             }
         },
         {
-            "name": "get one OrderColumn",
+            "name": "get one PaymentType",
             "request": {
                 "auth": {
                     "type": "bearer",
@@ -96,20 +96,20 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "{{domain}}/api/order_columns/1",
+                    "raw": "{{domain}}/api/payment_types/1",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order_columns",
+                        "payment_types",
                         "1"
                     ]
                 }
             }
         },
         {
-            "name": "create new OrderColumn",
+            "name": "create new PaymentType",
             "request": {
                 "auth": {
                     "type": "bearer",
@@ -133,19 +133,19 @@
                     "raw": "{\n \"data\":{\n\t\"title\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"description\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"content\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n\t\"image\":\"https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Uzbekistan.svg\"\n }\n}"
                 },
                 "url": {
-                    "raw": "{{domain}}/api/order_columns",
+                    "raw": "{{domain}}/api/payment_types",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order_columns"
+                        "payment_types"
                     ]
                 }
             }
         },
         {
-            "name": "update OrderColumn",
+            "name": "update PaymentType",
             "request": {
                 "auth": {
                     "type": "bearer",
@@ -169,13 +169,13 @@
                     "raw": "{\n \"data\":{\n\t\"title\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"description\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"content\":{\n\t\t \"uz\":\"O'zbekiston1\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n\t\"image\":\"https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Uzbekistan.svg\"\n }\n}"
                 },
                 "url": {
-                    "raw": "{{domain}}/api/order_columns/1",
+                    "raw": "{{domain}}/api/payment_types/1",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order_columns",
+                        "payment_types",
                         "1"
                     ]
                 }
