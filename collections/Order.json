@@ -145,6 +145,42 @@
             }
         },
         {
+            "name": "change order status",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{bearer_token}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\"id\":1,\n\"status\":1\n}"
+                },
+                "url": {
+                    "raw": "{{domain}}/api/change-status",
+                    "host": [
+                        "{{domain}}"
+                    ],
+                    "path": [
+                        "api",
+                        "change-status"
+                    ]
+                }
+            }
+        },
+        {
             "name": "update Order",
             "request": {
                 "auth": {

@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('price');
-            $table->foreignId('order_status')->constrained('order_columns');
+            $table->unsignedBigInteger('price')->nullable();
+            $table->foreignId('order_status')->default(1)->constrained('order_columns');
             $table->text('payment_status');
-            $table->foreignId('payment_type')->constrained('payment_types');
-            $table->json('order_detail');
+            $table->foreignId('payment_type')->nullable()->constrained('payment_types');
+            $table->json('order_detail')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
