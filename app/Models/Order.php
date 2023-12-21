@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Wildside\Userstamps\Userstamps;
 /**
  * @OA\Schema(
@@ -69,10 +70,9 @@ class Order extends Model
     const UPDATED_BY = 'updated_by';
     const DELETED_BY = 'deleted_by';
 
-    protected $fillable = [
-    ];
-
+    protected $fillable = [];
     protected $casts = [];
+    protected $with = ['orderStatus', 'paymentType', 'Cashier'];
     public static $rules = [
         "price" => 'numeric',
         "order_status" => 'numeric',
@@ -83,4 +83,19 @@ class Order extends Model
         "updated_by" => 'numeric',
         "user_id" => 'numeric',
     ];
+
+
+    public function orderStatus()
+    {
+        return $this->belongsTo(OrderColumn::class, 'order_status');
+    }
+    public function paymentType()
+    {
+        return $this->belongsTo(PaymentType::class, 'payment_type');
+    }
+    public function Cashier()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
 }

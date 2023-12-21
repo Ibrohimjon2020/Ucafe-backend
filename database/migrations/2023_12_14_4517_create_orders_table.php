@@ -20,9 +20,9 @@ return new class extends Migration
             $table->text('payment_status');
             $table->foreignId('payment_type')->nullable()->constrained('payment_types');
             $table->json('order_detail')->nullable();
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

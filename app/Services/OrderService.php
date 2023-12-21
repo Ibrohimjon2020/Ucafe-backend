@@ -12,10 +12,4 @@ class OrderService extends BaseService
     {
         $this->repository = $repository;
     }
-
-    public function getModelById($id): Model|array |Collection|Builder|null
-    {
-        return $this->getRepository()->findById($id);
-    }
-
 }
