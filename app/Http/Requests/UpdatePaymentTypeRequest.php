@@ -3,10 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Order;
+use App\Models\PaymentType;
 use Illuminate\Support\Facades\Auth;
 
-class UpdateOrderRequest extends FormRequest
+class UpdatePaymentTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +26,6 @@ class UpdateOrderRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-        "price" => 'numeric',
-        "order_status" => 'numeric',
-        "payment_status" => 'string',
-        "payment_type" => 'numeric|required',
-        "order_detail" => 'json|required',
-        "created_by" => 'numeric',
-        "updated_by" => 'numeric',
-        "user_id" => 'numeric',
-        ];
+        return PaymentType::$rules;
     }
 }

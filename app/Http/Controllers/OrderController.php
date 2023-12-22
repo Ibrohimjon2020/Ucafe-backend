@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use App\Models\OrderColumn;
 use App\Services\OrderService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Throwable;
 
 /**
@@ -84,7 +86,7 @@ class OrderController extends \App\Http\Controllers\Controller
      * @return array|Builder|Collection|Order|Builder[]|Order[]
      * @throws Throwable
      */
-    public function store(StoreOrderRequest $request): array|Builder|Collection|Order
+    public function store(StoreOrderRequest $request): JsonResponse|array|Builder|Collection|Order
     {
         return $this->service->createModel($request->validated());
 
@@ -203,4 +205,18 @@ class OrderController extends \App\Http\Controllers\Controller
     {
         return $this->service->deleteModel($productId);
     }
+// That is change order status
+    public function changeStatus(Request $request){
+        $orderColumn = OrderColumn::find($request->status);
+        $order = Order::find($request->id);
+        if ($orderColumn && $order){
+            $order->order_status = $request->status;
+            $order->save();
+        }else{
+            $order = response()->json(['message' => 'Bad Request'], 400);;
+        }
+        return $order;
+
+    }
+    
 }
