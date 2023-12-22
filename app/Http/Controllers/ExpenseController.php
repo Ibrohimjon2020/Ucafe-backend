@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreExpenseRequest;
@@ -43,7 +44,7 @@ class ExpenseController extends \App\Http\Controllers\Controller
      */
     public function index(): LengthAwarePaginator
     {
-        return $this->service->paginatedList();
+        return $this->service->paginatedList(request()->all());
     }
 
     /**
@@ -87,7 +88,6 @@ class ExpenseController extends \App\Http\Controllers\Controller
     public function store(StoreExpenseRequest $request): array|Builder|Collection|Expense
     {
         return $this->service->createModel($request->validated());
-
     }
 
     /**
@@ -165,10 +165,9 @@ class ExpenseController extends \App\Http\Controllers\Controller
      * @return array|Builder|Builder[]|Collection|Expense|Expense[]
      * @throws Throwable
      */
-    public function update(UpdateExpenseRequest $request,int $productId): array|Expense|Collection|Builder
+    public function update(UpdateExpenseRequest $request, int $productId): array|Expense|Collection|Builder
     {
-        return $this->service->updateModel($request->validated(),$productId);
-
+        return $this->service->updateModel($request->validated(), $productId);
     }
 
     /**

@@ -44,7 +44,7 @@ class StaffController extends \App\Http\Controllers\Controller
     public function index()
     {
         if (auth()->user()->hasRoles('Administrator'))
-            return User::whereHas('roles')->with('roles')->get();
+            return User::whereHas('roles')->with('roles')->paginate();
     }
 
     /**
@@ -88,7 +88,7 @@ class StaffController extends \App\Http\Controllers\Controller
             $staff = new User();
             $staff->name = $request->name;
             $staff->login = $request->login;
-            $staff->staff_status = $request->status ?? false;
+            $staff->staff_status = $request->staff_status ?? false;
             $staff->password = Hash::make($request->login);
             $staff->save();
             $role = Role::whereId($request->role)->firstOrFail();
@@ -170,12 +170,23 @@ class StaffController extends \App\Http\Controllers\Controller
      *
      * @param UpdateStaffRequest $request
      * @param int $productId
-     * @return array|Builder|Builder[]|Collection|Staff|Staff[]
+    //  * @return array|Builder|Builder[]|Collection|Staff|Staff[]
      * @throws Throwable
      */
-    public function update(UpdateStaffRequest $request, int $productId): array|Staff|Collection|Builder
+    public function update(UpdateStaffRequest $request, int $productId)
     {
-        // return $this->service->updateModel($request->validated(), $productId);
+        if (auth()->user()->hasRoles('Administrator')) {
+            $staff = User::whereId($productId)->firstOrfail();
+            $staff->name = $request->name;
+            $staff->login = $request->login;
+            $staff->staff_status = $request->staff_status ?? $staff->staff_status;
+            $staff->password = Hash::make($request->login);
+            $staff->save();
+            $staff->roles()->detach();
+            $role = Role::whereId($request->role)->firstOrFail();
+            $staff->giveRole($role->title['en']);
+            return response()->json($staff, 200);
+        } else return BaseService::permissionDenied();
     }
 
     /**

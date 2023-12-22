@@ -57,7 +57,6 @@ class BaseRepository
 
         if (!is_null($with))
             $query->with($with);
-
         return $query->paginate(15);
     }
 

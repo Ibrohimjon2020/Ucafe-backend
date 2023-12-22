@@ -26,6 +26,11 @@ class UpdateStaffRequest extends FormRequest
      */
     public function rules()
     {
-        return Staff::$rules;
+        return [
+            'login' => 'required|string',
+            'password' => 'string|nullable',
+            'name' => 'required|string',
+            'staff_status' => 'nullable|boolean'
+        ];
     }
 }
