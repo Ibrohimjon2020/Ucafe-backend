@@ -27,7 +27,7 @@ class OrderItemController extends \App\Http\Controllers\Controller
 
     /**
      * @OA\Get(
-     *  path="/api/order-item",
+     *  path="/api/order_items",
      *  operationId="indexOrderItem",
      *  tags={"OrderItems"},
      *  summary="Get list of OrderItem",
@@ -52,7 +52,7 @@ class OrderItemController extends \App\Http\Controllers\Controller
      *  summary="Insert a new OrderItem",
      *  description="Insert a new OrderItem",
      *  tags={"OrderItems"},
-     *  path="/api/order-item",
+     *  path="/api/order_items",
      *  @OA\RequestBody(
      *    description="OrderItem to create",
      *    required=true,
@@ -92,7 +92,7 @@ class OrderItemController extends \App\Http\Controllers\Controller
 
     /**
      * @OA\Get(
-     *   path="/api/order-item/{orderitem_id}",
+     *   path="/api/order_items/{orderitem_id}",
      *   summary="Show a OrderItem from his Id",
      *   description="Show a OrderItem from his Id",
      *   operationId="showOrderItem",
@@ -128,7 +128,7 @@ class OrderItemController extends \App\Http\Controllers\Controller
      *   summary="Update an existing OrderItem",
      *   description="Update an existing OrderItem",
      *   tags={"OrderItems"},
-     *   path="/api/order-item/{orderitem_id}",
+     *   path="/api/order_items/{orderitem_id}",
      *   @OA\Parameter(ref="#/components/parameters/OrderItem--id"),
      *   @OA\Response(
      *     response=200,
@@ -173,7 +173,7 @@ class OrderItemController extends \App\Http\Controllers\Controller
 
     /**
      * @OA\Delete(
-     *  path="/api/order-item/{orderitem_id}",
+     *  path="/api/order_items/{orderitem_id}",
      *  summary="Delete a OrderItem",
      *  description="Delete a OrderItem",
      *  operationId="destroyOrderItem",

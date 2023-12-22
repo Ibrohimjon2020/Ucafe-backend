@@ -33,13 +33,13 @@
                     }
                 ],
                 "url": {
-                    "raw": "{{domain}}/api/order-column",
+                    "raw": "{{domain}}/api/order_columns",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order-column"
+                        "order_columns"
                     ],
                     "query": [
                         {
@@ -68,13 +68,13 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                    "raw": "{{domain}}/api/order-column/1",
+                    "raw": "{{domain}}/api/order_columns/1",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order-column",
+                        "order_columns",
                         "1"
                     ]
                 }
@@ -96,13 +96,13 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                    "raw": "{{domain}}/api/order-column/1",
+                    "raw": "{{domain}}/api/order_columns/1",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order-column",
+                        "order_columns",
                         "1"
                     ]
                 }
@@ -133,13 +133,13 @@
                     "raw": "{\n \"data\":{\n\t\"title\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"description\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"content\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n\t\"image\":\"https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Uzbekistan.svg\"\n }\n}"
                 },
                 "url": {
-                    "raw": "{{domain}}/api/order-column",
+                    "raw": "{{domain}}/api/order_columns",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order-column"
+                        "order_columns"
                     ]
                 }
             }
@@ -169,13 +169,13 @@
                     "raw": "{\n \"data\":{\n\t\"title\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"description\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"content\":{\n\t\t \"uz\":\"O'zbekiston1\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n\t\"image\":\"https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Uzbekistan.svg\"\n }\n}"
                 },
                 "url": {
-                    "raw": "{{domain}}/api/order-column/1",
+                    "raw": "{{domain}}/api/order_columns/1",
                     "host": [
                         "{{domain}}"
                     ],
                     "path": [
                         "api",
-                        "order-column",
+                        "order_columns",
                         "1"
                     ]
                 }

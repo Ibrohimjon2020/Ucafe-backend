@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Builder;
 /**
  * @OA\Schema(
  *   description="OrderColumn model",
@@ -64,10 +64,9 @@ class OrderColumn extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-    ];
+    protected $fillable = [];
 
-    protected $casts = [];
+    protected $casts = ['title'=>'array'];
     public static $rules = [
         "title" => 'array|required',
     ];

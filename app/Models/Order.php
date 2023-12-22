@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Builder;
+use Wildside\Userstamps\Userstamps;
 /**
  * @OA\Schema(
  *   description="Order model",
@@ -63,18 +64,38 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    use Userstamps;
 
-    protected $fillable = [
-    ];
+    const CREATED_BY = 'created_by';
+    const UPDATED_BY = 'updated_by';
+    const DELETED_BY = 'deleted_by';
 
+    protected $fillable = [];
     protected $casts = [];
+    protected $with = ['orderStatus', 'paymentType', 'Cashier'];
     public static $rules = [
-        "title" => 'string|required',
-"description" => 'string|required',
-"image" => 'string|nullable',
-"company_id" => 'numeric|nullable',
-"created_by" => 'numeric|nullable',
-"updated_by" => 'numeric|nullable',
-"deleted_by" => 'numeric|nullable',
+        "price" => 'numeric',
+        "order_status" => 'numeric',
+        "payment_status" => 'string',
+        "payment_type" => 'numeric',
+        "order_detail" => 'json',
+        "created_by" => 'numeric',
+        "updated_by" => 'numeric',
+        "user_id" => 'numeric',
     ];
+
+
+    public function orderStatus()
+    {
+        return $this->belongsTo(OrderColumn::class, 'order_status');
+    }
+    public function paymentType()
+    {
+        return $this->belongsTo(PaymentType::class, 'payment_type');
+    }
+    public function Cashier()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
 }

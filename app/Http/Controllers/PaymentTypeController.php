@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOrderColumnRequest;
-use App\Http\Requests\UpdateOrderColumnRequest;
-use App\Models\OrderColumn;
-use App\Services\OrderColumnService;
+use App\Http\Requests\StorePaymentTypeRequest;
+use App\Http\Requests\UpdatePaymentTypeRequest;
+use App\Models\PaymentType;
+use App\Services\PaymentTypeService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,31 +13,31 @@ use Illuminate\Http\JsonResponse;
 use Throwable;
 
 /**
- * Class OrderColumnController
+ * Class PaymentTypeController
  * @package  App\Http\Controllers
  */
-class OrderColumnController extends \App\Http\Controllers\Controller
+class PaymentTypeController extends \App\Http\Controllers\Controller
 {
-    private OrderColumnService $service;
+    private PaymentTypeService $service;
 
-    public function __construct(OrderColumnService $service)
+    public function __construct(PaymentTypeService $service)
     {
         $this->service = $service;
     }
 
     /**
      * @OA\Get(
-     *  path="/api/order_columns",
-     *  operationId="indexOrderColumn",
-     *  tags={"OrderColumns"},
-     *  summary="Get list of OrderColumn",
-     *  description="Returns list of OrderColumn",
+     *  path="/api/payment_types",
+     *  operationId="indexPaymentType",
+     *  tags={"PaymentTypes"},
+     *  summary="Get list of PaymentType",
+     *  description="Returns list of PaymentType",
      *  @OA\Response(response=200, description="Successful operation",
-     *    @OA\JsonContent(ref="#/components/schemas/OrderColumns"),
+     *    @OA\JsonContent(ref="#/components/schemas/PaymentTypes"),
      *  ),
      * )
      *
-     * Display a listing of OrderColumn.
+     * Display a listing of PaymentType.
      * @return LengthAwarePaginator
      * @throws Throwable
      */
@@ -48,13 +48,13 @@ class OrderColumnController extends \App\Http\Controllers\Controller
 
     /**
      * @OA\Post(
-     *  operationId="storeOrderColumn",
-     *  summary="Insert a new OrderColumn",
-     *  description="Insert a new OrderColumn",
-     *  tags={"OrderColumns"},
-     *  path="/api/order_columns",
+     *  operationId="storePaymentType",
+     *  summary="Insert a new PaymentType",
+     *  description="Insert a new PaymentType",
+     *  tags={"PaymentTypes"},
+     *  path="/api/payment_types",
      *  @OA\RequestBody(
-     *    description="OrderColumn to create",
+     *    description="PaymentType to create",
      *    required=true,
      *    @OA\MediaType(
      *      mediaType="application/json",
@@ -63,28 +63,28 @@ class OrderColumnController extends \App\Http\Controllers\Controller
      *      title="data",
      *      property="data",
      *      type="object",
-     *      ref="#/components/schemas/OrderColumn")
+     *      ref="#/components/schemas/PaymentType")
      *     )
      *    )
      *  ),
-     *  @OA\Response(response="201",description="OrderColumn created",
+     *  @OA\Response(response="201",description="PaymentType created",
      *     @OA\JsonContent(
      *      @OA\Property(
      *       title="data",
      *       property="data",
      *       type="object",
-     *       ref="#/components/schemas/OrderColumn"
+     *       ref="#/components/schemas/PaymentType"
      *      ),
      *    ),
      *  ),
      *  @OA\Response(response=422,description="Validation exception"),
      * )
      *
-     * @param StoreOrderColumnRequest $request
-     * @return array|Builder|Collection|OrderColumn|Builder[]|OrderColumn[]
+     * @param StorePaymentTypeRequest $request
+     * @return array|Builder|Collection|PaymentType|Builder[]|PaymentType[]
      * @throws Throwable
      */
-    public function store(StoreOrderColumnRequest $request): array|Builder|Collection|OrderColumn
+    public function store(StorePaymentTypeRequest $request): array|Builder|Collection|PaymentType
     {
         return $this->service->createModel($request->validated());
 
@@ -92,12 +92,12 @@ class OrderColumnController extends \App\Http\Controllers\Controller
 
     /**
      * @OA\Get(
-     *   path="/api/order_columns/{ordercolumn_id}",
-     *   summary="Show a OrderColumn from his Id",
-     *   description="Show a OrderColumn from his Id",
-     *   operationId="showOrderColumn",
-     *   tags={"OrderColumns"},
-     *   @OA\Parameter(ref="#/components/parameters/OrderColumn--id"),
+     *   path="/api/payment_types/{paymenttype_id}",
+     *   summary="Show a PaymentType from his Id",
+     *   description="Show a PaymentType from his Id",
+     *   operationId="showPaymentType",
+     *   tags={"PaymentTypes"},
+     *   @OA\Parameter(ref="#/components/parameters/PaymentType--id"),
      *   @OA\Response(
      *     response=200,
      *     description="Successful operation",
@@ -106,11 +106,11 @@ class OrderColumnController extends \App\Http\Controllers\Controller
      *       title="data",
      *       property="data",
      *       type="object",
-     *       ref="#/components/schemas/OrderColumn"
+     *       ref="#/components/schemas/PaymentType"
      *       ),
      *     ),
      *   ),
-     *   @OA\Response(response="404",description="OrderColumn not found"),
+     *   @OA\Response(response="404",description="PaymentType not found"),
      * )
      *
      * @param $productId
@@ -124,12 +124,12 @@ class OrderColumnController extends \App\Http\Controllers\Controller
 
     /**
      * @OA\Patch(
-     *   operationId="updateOrderColumn",
-     *   summary="Update an existing OrderColumn",
-     *   description="Update an existing OrderColumn",
-     *   tags={"OrderColumns"},
-     *   path="/api/order_columns/{ordercolumn_id}",
-     *   @OA\Parameter(ref="#/components/parameters/OrderColumn--id"),
+     *   operationId="updatePaymentType",
+     *   summary="Update an existing PaymentType",
+     *   description="Update an existing PaymentType",
+     *   tags={"PaymentTypes"},
+     *   path="/api/payment_types/{paymenttype_id}",
+     *   @OA\Parameter(ref="#/components/parameters/PaymentType--id"),
      *   @OA\Response(
      *     response=200,
      *     description="Successful operation",
@@ -138,13 +138,13 @@ class OrderColumnController extends \App\Http\Controllers\Controller
      *       title="data",
      *       property="data",
      *       type="object",
-     *       ref="#/components/schemas/OrderColumn"
+     *       ref="#/components/schemas/PaymentType"
      *       ),
      *     ),
      *   ),
-     *   @OA\Response(response="404",description="OrderColumn not found"),
+     *   @OA\Response(response="404",description="PaymentType not found"),
      *   @OA\RequestBody(
-     *     description="OrderColumn to update",
+     *     description="PaymentType to update",
      *     required=true,
      *     @OA\MediaType(
      *       mediaType="application/json",
@@ -153,19 +153,19 @@ class OrderColumnController extends \App\Http\Controllers\Controller
      *        title="data",
      *        property="data",
      *        type="object",
-     *        ref="#/components/schemas/OrderColumn")
+     *        ref="#/components/schemas/PaymentType")
      *      )
      *     )
      *   )
      *
      * )
      *
-     * @param UpdateOrderColumnRequest $request
+     * @param UpdatePaymentTypeRequest $request
      * @param int $productId
-     * @return array|Builder|Builder[]|Collection|OrderColumn|OrderColumn[]
+     * @return array|Builder|Builder[]|Collection|PaymentType|PaymentType[]
      * @throws Throwable
      */
-    public function update(UpdateOrderColumnRequest $request,int $productId): array|OrderColumn|Collection|Builder
+    public function update(UpdatePaymentTypeRequest $request,int $productId): array|PaymentType|Collection|Builder
     {
         return $this->service->updateModel($request->validated(),$productId);
 
@@ -173,11 +173,11 @@ class OrderColumnController extends \App\Http\Controllers\Controller
 
     /**
      * @OA\Delete(
-     *  path="/api/order_columns/{ordercolumn_id}",
-     *  summary="Delete a OrderColumn",
-     *  description="Delete a OrderColumn",
-     *  operationId="destroyOrderColumn",
-     *  tags={"OrderColumns"},
+     *  path="/api/payment_types/{paymenttype_id}",
+     *  summary="Delete a PaymentType",
+     *  description="Delete a PaymentType",
+     *  operationId="destroyPaymentType",
+     *  tags={"PaymentTypes"},
      *   @OA\Response(
      *     response=200,
      *     description="Successful operation",
@@ -186,20 +186,20 @@ class OrderColumnController extends \App\Http\Controllers\Controller
      *       title="data",
      *       property="data",
      *       type="object",
-     *       ref="#/components/schemas/OrderColumn"
+     *       ref="#/components/schemas/PaymentType"
      *       ),
      *     ),
      *   ),
-     *  @OA\Parameter(ref="#/components/parameters/OrderColumn--id"),
+     *  @OA\Parameter(ref="#/components/parameters/PaymentType--id"),
      *  @OA\Response(response=204,description="No content"),
-     *  @OA\Response(response=404,description="OrderColumn not found"),
+     *  @OA\Response(response=404,description="PaymentType not found"),
      * )
      *
      * @param int $productId
-     * @return array|Builder|Builder[]|Collection|OrderColumn|OrderColumn[]
+     * @return array|Builder|Builder[]|Collection|PaymentType|PaymentType[]
      * @throws Throwable
      */
-    public function destroy(int $productId): array|Builder|Collection|OrderColumn
+    public function destroy(int $productId): array|Builder|Collection|PaymentType
     {
         return $this->service->deleteModel($productId);
     }

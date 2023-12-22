@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_column', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->json('title');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('price');
+            $table->unsignedInteger('quantity');
+            $table->unsignedBigInteger('order_id');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order-column');
+        Schema::dropIfExists('order_items');
     }
 };

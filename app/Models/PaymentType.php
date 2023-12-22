@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @OA\Schema(
- *   description="OrderItem model",
- *   title="OrderItem",
+ *   description="PaymentType model",
+ *   title="PaymentType",
  *   required={},
- *   @OA\Property(type="integer",description="id of OrderItem",title="id",property="id",example="1",readOnly="true"),
- *   @OA\Property(type="string",description="name of OrderItem",title="name",property="name",example="Macbook Pro"),
- *   @OA\Property(type="string",description="sku of OrderItem",title="sku",property="sku",example="MCBPRO2022"),
- *   @OA\Property(type="integer",description="price of OrderItem",title="price",property="price",example="99"),
+ *   @OA\Property(type="integer",description="id of PaymentType",title="id",property="id",example="1",readOnly="true"),
+ *   @OA\Property(type="string",description="name of PaymentType",title="name",property="name",example="Macbook Pro"),
+ *   @OA\Property(type="string",description="sku of PaymentType",title="sku",property="sku",example="MCBPRO2022"),
+ *   @OA\Property(type="integer",description="price of PaymentType",title="price",property="price",example="99"),
  *   @OA\Property(type="dateTime",title="created_at",property="created_at",example="2022-07-04T02:41:42.336Z",readOnly="true"),
  *   @OA\Property(type="dateTime",title="updated_at",property="updated_at",example="2022-07-04T02:41:42.336Z",readOnly="true"),
  * )
@@ -23,10 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  *
  *
  * @OA\Schema (
- *   schema="OrderItems",
- *   title="OrderItems list",
+ *   schema="PaymentTypes",
+ *   title="PaymentTypes list",
  *   @OA\Property(title="data",property="data",type="array",
- *     @OA\Items(type="object",ref="#/components/schemas/OrderItem"),
+ *     @OA\Items(type="object",ref="#/components/schemas/PaymentType"),
  *   ),
  *   @OA\Property(type="string", title="first_page_url",property="first_page_url",example="http://localhost:8080/api/merchant-customers?page=1"),
  *   @OA\Property(type="string", title="last_page_url",property="last_page_url",example="http://localhost:8080/api/merchant-customers?page=3"),
@@ -48,11 +48,11 @@ use Illuminate\Database\Eloquent\Model;
  * )
  *
  * @OA\Parameter(
- *      parameter="OrderItem--id",
+ *      parameter="PaymentType--id",
  *      in="path",
- *      name="OrderItem_id",
+ *      name="PaymentType_id",
  *      required=true,
- *      description="Id of OrderItem",
+ *      description="Id of PaymentType",
  *      @OA\Schema(
  *          type="integer",
  *          example="1",
@@ -60,18 +60,14 @@ use Illuminate\Database\Eloquent\Model;
  * ),
  */
 
-class OrderItem extends Model
+class PaymentType extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-    ];
+    protected $fillable = ['title'];
 
-    protected $casts = [];
+    protected $casts = ['title' => 'array'];
     public static $rules = [
-        "product_id" => 'numeric|required',
-"price" => 'numeric|required',
-"quantity" => 'numeric|required',
-"order_id" => 'numeric|required',
+        "title" => 'array|required',
     ];
 }
