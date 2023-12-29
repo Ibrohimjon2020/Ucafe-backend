@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\OrderRepository;
 use App\Models\OrderItem;
 use App\Models\MenuItem;
+use App\Models\MenuType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -92,4 +93,19 @@ class OrderService extends BaseService
         return $order;
     }
 
+    public function deleteModel($id): array|Builder|Collection|Model
+    {
+        // If OrderItem has a that order_id, MenuItem should update quantity.
+        $orderItems = OrderItem::where('order_id', $id)->get();
+        if ($orderItems){
+            foreach($orderItems as $item){
+                $menuItem = MenuItem::find($item->product_id);
+                $menuItem->quantity += $item->quantity;
+                $menuItem->save();
+                $item->delete();
+            }
+        }
+        $order = parent::deleteModel($id);
+       return $order;
+    }
 }

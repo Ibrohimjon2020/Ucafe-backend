@@ -48,7 +48,7 @@ class OrderController extends \App\Http\Controllers\Controller
      * @return LengthAwarePaginator
      * @throws Throwable
      */
-    public function index(Request $request)
+    public function index(Request $request): LengthAwarePaginator
     {
         return $this->service->paginatedList($request);
     }
@@ -212,18 +212,18 @@ class OrderController extends \App\Http\Controllers\Controller
     }
     
     // That is change order status
-    public function changeStatus(Request $request){
-        $orderColumn = OrderColumn::find($request->status);
-        $order = Order::find($request->id);
-        if ($orderColumn && $order){
-            $order->order_status = $request->status;
-            $order->save();
-        }else{
-            $order = response()->json(['message' => 'Bad Request'], 400);;
-        }
-        return $order;
+    // public function changeStatus(Request $request){
+    //     $orderColumn = OrderColumn::find($request->status);
+    //     $order = Order::find($request->id);
+    //     if ($orderColumn && $order){
+    //         $order->order_status = $request->status;
+    //         $order->save();
+    //     }else{
+    //         $order = response()->json(['message' => 'Bad Request'], 400);;
+    //     }
+    //     return $order;
 
-    }
+    // }
 
     
 }
