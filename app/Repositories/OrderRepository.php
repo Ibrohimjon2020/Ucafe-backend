@@ -18,6 +18,9 @@ class OrderRepository extends BaseRepository
     public function create($data): array|Collection|Builder|Model|null
     {
         $model = $this->getModel();
+        foreach ($data as $item => $value) {
+            $model->{$item} = $value;
+        }
         $model->payment_status = 'unpaid';
         $model->save();
         return $model;
@@ -27,15 +30,19 @@ class OrderRepository extends BaseRepository
     {
         $model = $this->query()->whereId($id)->first();
         foreach ($data as $item => $value) {
-
             $model->{$item} = $value;
         }
-        $order_price_sum = OrderItem::where('order_id', $id)
-            ->selectRaw('SUM(price * quantity) as total_amount')
-            ->groupBy('order_id')
-            ->first();
-        $model->price = $order_price_sum->total_amount;
-        $model->payment_status = 'paid';
+        // If request has a payent_status, Update price column in Order table.
+        if (!empty($data['payment_status'])) {
+            $order_price_sum = OrderItem::where('order_id', $id)
+                ->selectRaw('SUM(price * quantity) as total_amount')
+                ->groupBy('order_id')
+                ->first();
+            if ($order_price_sum) {
+                $model->price = $order_price_sum->total_amount;
+                $model->payment_status = 'paid';
+            }
+        }
         $model->save();
         return $model;
     }
