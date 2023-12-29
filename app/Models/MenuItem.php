@@ -87,6 +87,7 @@ class MenuItem extends Model
     public function scopeFilter(Builder $query, $data)
     {
         if (isset($data['type_id'])) $query->where('menu_type_id', $data['type_id']);
+        if (isset($data['status'])) $query->where('status', $data['status']);
         return $query;
     }
 }

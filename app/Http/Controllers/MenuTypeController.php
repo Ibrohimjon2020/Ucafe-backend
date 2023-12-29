@@ -41,9 +41,9 @@ class MenuTypeController extends \App\Http\Controllers\Controller
      * @return LengthAwarePaginator
      * @throws Throwable
      */
-    public function index(): LengthAwarePaginator
+    public function index(): LengthAwarePaginator|Collection
     {
-        return $this->service->paginatedList();
+        return $this->service->paginatedList([]);
     }
 
     /**
@@ -87,7 +87,6 @@ class MenuTypeController extends \App\Http\Controllers\Controller
     public function store(StoreMenuTypeRequest $request): array|Builder|Collection|MenuType
     {
         return $this->service->createModel($request->validated());
-
     }
 
     /**
@@ -165,10 +164,9 @@ class MenuTypeController extends \App\Http\Controllers\Controller
      * @return array|Builder|Builder[]|Collection|MenuType|MenuType[]
      * @throws Throwable
      */
-    public function update(UpdateMenuTypeRequest $request,int $productId): array|MenuType|Collection|Builder
+    public function update(UpdateMenuTypeRequest $request, int $productId): array|MenuType|Collection|Builder
     {
-        return $this->service->updateModel($request->validated(),$productId);
-
+        return $this->service->updateModel($request->validated(), $productId);
     }
 
     /**

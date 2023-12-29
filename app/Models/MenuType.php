@@ -65,7 +65,7 @@ class MenuType extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','logo', 'order'];
+    protected $fillable = ['title', 'logo', 'order_number'];
 
     protected $casts = [
         'title' => 'array'
@@ -74,12 +74,4 @@ class MenuType extends Model
         "title" => 'array|required',
         "logo" => 'string|nullable',
     ];
-
-    public function scopeFilter(Builder $query)
-    {
-        $query->orderBy('order', 'asc');
-
-
-        return $query;
-    }
 }

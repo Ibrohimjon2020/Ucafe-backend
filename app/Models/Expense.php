@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -61,12 +62,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 
 class Expense extends Model
-{   
+{
     //public $table => 'expenses'
     use HasFactory;
 
-    protected $fillable = [
-    ];
+    protected $fillable = [];
 
     protected $casts = [
         'day' => 'date'
@@ -76,4 +76,10 @@ class Expense extends Model
         "price" => 'numeric|required',
         "description" => 'string|required',
     ];
+
+    public function scopeFilter(Builder $query, $data)
+    {
+        if(isset($data['from_date'])) $query->where('day','>=', $data['from_date']);
+        if(isset($data['to_date'])) $query->where('day','<=', $data['to_date']);
+    }
 }
