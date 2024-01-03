@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Wildside\Userstamps\Userstamps;
+
 /**
  * @OA\Schema(
  *   description="Order model",
@@ -88,13 +89,28 @@ class Order extends Model
     {
         return $this->belongsTo(OrderColumn::class, 'order_status')->select(['id', 'title']);
     }
+
     public function paymentType()
     {
         return $this->belongsTo(PaymentType::class, 'payment_type')->select(['id', 'title']);;
     }
+
     public function Cashier()
     {
         return $this->belongsTo(User::class, 'updated_by')->select(['id', 'name']);
     }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id')->select(['id', 'product_id', 'price', 'quantity', 'order_id']);
+    }
+
+    public function scopeFilter(Builder $query, $data)
+    {
+        if ($data['from_date'] && $data['to_date'])  $query->whereBetween('created_at', [$data['from_date'], $data['to_date']]);
+        elseif (isset($data['from_date'])) $query->whereBetween('created_at', [$data['from_date'], date("Y-m-d h:i:s")]);
+        if (isset($data['payment_type'])) $query->where('payment_type', $data['payment_type']);
+        if (isset($data['order_detail'])) $query->whereJsonContains('order_detail', json_decode($data['order_detail'], true));
+        return $query;
+    }
 }

@@ -67,7 +67,7 @@ class OrderItem extends Model
     protected $fillable = [
 
     ];
-    protected $with = ['productId'];
+    protected $with = ['product'];
     protected $casts = [];
     public static $rules = [
         "product_id" => 'numeric|required',
@@ -76,8 +76,13 @@ class OrderItem extends Model
         "order_id" => 'numeric|required',
     ];
 
-    public function productId()
+    public function product()
     {
-        return $this->belongsTo(MenuItem::class, 'product_id');
+        return $this->belongsTo(MenuItem::class, 'product_id')->select(['id', 'title', 'image']);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'id');
     }
 }
