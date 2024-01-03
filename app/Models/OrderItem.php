@@ -65,13 +65,24 @@ class OrderItem extends Model
     use HasFactory;
 
     protected $fillable = [
-    ];
 
+    ];
+    protected $with = ['product'];
     protected $casts = [];
     public static $rules = [
         "product_id" => 'numeric|required',
-"price" => 'numeric|required',
-"quantity" => 'numeric|required',
-"order_id" => 'numeric|required',
+        "price" => 'numeric|required',
+        "quantity" => 'numeric|required|min:1',
+        "order_id" => 'numeric|required',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(MenuItem::class, 'product_id')->select(['id', 'title', 'image']);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'id');
+    }
 }

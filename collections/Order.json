@@ -130,7 +130,7 @@
                 ],
                 "body": {
                     "mode": "raw",
-                    "raw": "{\n \"data\":{\n\t\"title\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"description\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"content\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n\t\"image\":\"https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Uzbekistan.svg\"\n }\n}"
+                    "raw": "{\n \"order_status\": 1,\n \"payment_type\": 2,\n \"order_detail\": {\"name\": \"saboy\"},\n\"order_items\": [{\"product_id\": 1,  \"quantity\": 20}, {\"product_id\": 2,  \"quantity\": 5}] \n}"
                 },
                 "url": {
                     "raw": "{{domain}}/api/orders",
@@ -140,42 +140,6 @@
                     "path": [
                         "api",
                         "orders"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "change order status",
-            "request": {
-                "auth": {
-                    "type": "bearer",
-                    "bearer": [
-                        {
-                            "key": "token",
-                            "value": "{{bearer_token}}",
-                            "type": "string"
-                        }
-                    ]
-                },
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n\"id\":1,\n\"status\":1\n}"
-                },
-                "url": {
-                    "raw": "{{domain}}/api/change-status",
-                    "host": [
-                        "{{domain}}"
-                    ],
-                    "path": [
-                        "api",
-                        "change-status"
                     ]
                 }
             }
@@ -202,7 +166,7 @@
                 ],
                 "body": {
                     "mode": "raw",
-                    "raw": "{\n \"data\":{\n\t\"title\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"description\":{\n\t\t \"uz\":\"O'zbekiston\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n    \"content\":{\n\t\t \"uz\":\"O'zbekiston1\",\n\t\t \"ru\":\"Узбекистан\"\n\t},\n\t\"image\":\"https://upload.wikimedia.org/wikipedia/commons/8/84/Flag_of_Uzbekistan.svg\"\n }\n}"
+                    "raw": "{\n \"order_status\": 2,\n \"payment_type\": 2,\n \"order_detail\": {\"name\": \"saboy\"},\n\"order_items\": [{\"order_item_id\": 1,  \"quantity\": 20}, {\"order_item_id\": 2,  \"quantity\": 5}] \n}"
                 },
                 "url": {
                     "raw": "{{domain}}/api/orders/1",

@@ -26,15 +26,6 @@ class UpdateOrderRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-        "price" => 'numeric',
-        "order_status" => 'numeric',
-        "payment_status" => 'string',
-        "payment_type" => 'numeric|required',
-        "order_detail" => 'json|required',
-        "created_by" => 'numeric',
-        "updated_by" => 'numeric',
-        "user_id" => 'numeric',
-        ];
+        return Order::$rules;
     }
 }

@@ -1,17 +1,19 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\StoreOrderRequest;  
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 use App\Models\OrderColumn;
 use App\Services\OrderService;
+use App\Services\OrderItemService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Throwable;
 
 /**
@@ -21,10 +23,13 @@ use Throwable;
 class OrderController extends \App\Http\Controllers\Controller
 {
     private OrderService $service;
+    private OrderItemService $serviceItem;
 
-    public function __construct(OrderService $service)
+
+    public function __construct(OrderService $service, OrderItemService $serviceItem)
     {
         $this->service = $service;
+        $this->serviceItem = $serviceItem;
     }
 
     /**
@@ -43,9 +48,9 @@ class OrderController extends \App\Http\Controllers\Controller
      * @return LengthAwarePaginator
      * @throws Throwable
      */
-    public function index(): LengthAwarePaginator
+    public function index(Request $request): LengthAwarePaginator
     {
-        return $this->service->paginatedList();
+        return $this->service->paginatedList($request);
     }
 
     /**
@@ -205,18 +210,20 @@ class OrderController extends \App\Http\Controllers\Controller
     {
         return $this->service->deleteModel($productId);
     }
-// That is change order status
-    public function changeStatus(Request $request){
-        $orderColumn = OrderColumn::find($request->status);
-        $order = Order::find($request->id);
-        if ($orderColumn && $order){
-            $order->order_status = $request->status;
-            $order->save();
-        }else{
-            $order = response()->json(['message' => 'Bad Request'], 400);;
-        }
-        return $order;
+    
+    // That is change order status
+    // public function changeStatus(Request $request){
+    //     $orderColumn = OrderColumn::find($request->status);
+    //     $order = Order::find($request->id);
+    //     if ($orderColumn && $order){
+    //         $order->order_status = $request->status;
+    //         $order->save();
+    //     }else{
+    //         $order = response()->json(['message' => 'Bad Request'], 400);;
+    //     }
+    //     return $order;
 
-    }
+    // }
+
     
 }
