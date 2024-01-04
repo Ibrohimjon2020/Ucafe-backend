@@ -46,11 +46,4 @@ class OrderRepository extends BaseRepository
         $model->save();
         return $model;
     }
-
-    public function findById($id, $relations = ['orderItems']): Model|array|Collection|Builder|null
-    {
-        if (!empty($relations))
-            return $this->query()->with($relations)->findOrFail($id);
-        return $this->query()->findOrFail($id);
-    }
 }

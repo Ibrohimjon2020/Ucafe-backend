@@ -114,7 +114,7 @@ class BaseRepository
      */
     public
     function findById($id, $relations = []): Model|array|Collection|Builder|null
-    {
+    { 
         if (!empty($relations))
             return $this->query()->with($relations)->findOrFail($id);
         return $this->query()->findOrFail($id);
