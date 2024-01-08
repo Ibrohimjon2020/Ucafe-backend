@@ -6,7 +6,6 @@ use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
 use App\Models\OrderColumn;
 use App\Services\OrderService;
-use App\Services\OrderItemService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -23,13 +22,11 @@ use Throwable;
 class OrderController extends \App\Http\Controllers\Controller
 {
     private OrderService $service;
-    private OrderItemService $serviceItem;
 
 
-    public function __construct(OrderService $service, OrderItemService $serviceItem)
+    public function __construct(OrderService $service)
     {
         $this->service = $service;
-        $this->serviceItem = $serviceItem;
     }
 
     /**
@@ -48,9 +45,9 @@ class OrderController extends \App\Http\Controllers\Controller
      * @return LengthAwarePaginator
      * @throws Throwable
      */
-    public function index(Request $request): LengthAwarePaginator
+    public function index(Request $request): LengthAwarePaginator|Collection
     {
-        return $this->service->paginatedList($request);
+        return $this->service->paginatedList($request, $request->has('all'));
     }
 
     /**
@@ -172,7 +169,7 @@ class OrderController extends \App\Http\Controllers\Controller
      * @return array|Builder|Builder[]|Collection|Order|Order[]
      * @throws Throwable
      */
-    public function update(UpdateOrderRequest $request,int $productId): array|Order|Collection|Builder
+    public function update(UpdateOrderRequest $request,int $productId): JsonResponse|array|Order|Collection|Builder
     {
         return $this->service->updateModel($request->validated(),$productId);
 
@@ -225,5 +222,9 @@ class OrderController extends \App\Http\Controllers\Controller
 
     // }
 
+    public function report(Request $request)
+    {
+        return $this->service->getReport($request);
+    }
     
 }

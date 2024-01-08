@@ -79,7 +79,6 @@ class Expense extends Model
 
     public function scopeFilter(Builder $query, $data)
     {
-        if(isset($data['from_date'])) $query->where('day','>=', $data['from_date']);
-        if(isset($data['to_date'])) $query->where('day','<=', $data['to_date']);
+        if ($data['from_date'] && $data['to_date'])  $query->whereBetween('day', [$data['from_date'], $data['to_date']]);
     }
 }

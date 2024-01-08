@@ -130,7 +130,7 @@
                 ],
                 "body": {
                     "mode": "raw",
-                    "raw": "{\n \"order_status\": 1,\n \"payment_type\": 2,\n \"order_detail\": {\"name\": \"saboy\"},\n\"order_items\": [{\"product_id\": 1,  \"quantity\": 20}, {\"product_id\": 2,  \"quantity\": 5}] \n}"
+                    "raw": "{\n \"order_status\": 1,\n \"payment_type\": 2,\n \"order_detail\": {\"name\": \"with myself\"},\n\"order_items\": [{\"product_id\": 1,  \"quantity\": 20}, {\"product_id\": 2,  \"quantity\": 5}] \n}"
                 },
                 "url": {
                     "raw": "{{domain}}/api/orders",
@@ -166,7 +166,7 @@
                 ],
                 "body": {
                     "mode": "raw",
-                    "raw": "{\n \"order_status\": 2,\n \"payment_type\": 2,\n \"order_detail\": {\"name\": \"saboy\"},\n\"order_items\": [{\"order_item_id\": 1,  \"quantity\": 20}, {\"order_item_id\": 2,  \"quantity\": 5}] \n}"
+                    "raw": "{\n \"order_status\": 2,\n \"payment_type\": 2,\n \"order_detail\": {\"name\": \"with myself\"},\n\"order_items\": [{\"order_item_id\": 1,  \"quantity\": 20}, {\"order_item_id\": 2,  \"quantity\": 5}] \n}"
                 },
                 "url": {
                     "raw": "{{domain}}/api/orders/1",

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Builder;
 /**
  * @OA\Schema(
  *   description="OrderItem model",
@@ -84,5 +84,10 @@ class OrderItem extends Model
     public function order()
     {
         return $this->belongsTo(Order::class, 'id');
+    }
+
+    public function scopeFilter(Builder $query, $data)
+    {
+        if ($data)  $query->where('order_id', $data);
     }
 }

@@ -7,7 +7,7 @@ use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Http\JsonResponse;
 class OrderRepository extends BaseRepository
 {
     public function __construct(Order $model)
@@ -20,6 +20,13 @@ class OrderRepository extends BaseRepository
         $model = $this->getModel();
         foreach ($data as $item => $value) {
             $model->{$item} = $value;
+            if ($item === "order_detail"){
+                $orderDetailData = json_decode($value, true);
+                $orderDetailCondition = ['with myself', 'in place', 'delivery'];
+                if (!(isset($orderDetailData['name']) && in_array($orderDetailData['name'], $orderDetailCondition))) {
+                    return ['message' => "Order_detail is wrong"];
+                } 
+            }
         }
         $model->payment_status = 'unpaid';
         $model->save();

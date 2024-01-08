@@ -56,7 +56,7 @@ class BaseService
      * @return Model|Model[]|Builder|Builder[]|Collection|null
      * @throws Throwable
      */
-    public function updateModel($data, $id): array |Collection|Builder|Model|null
+    public function updateModel($data, $id): array |Collection|Builder|Model|null|JsonResponse
     {
         if (auth()->user()->can('update', $this->repository->getModel()))
             return $this->getRepository()->update($data, $id);

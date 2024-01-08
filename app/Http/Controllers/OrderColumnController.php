@@ -5,11 +5,13 @@ use App\Http\Requests\StoreOrderColumnRequest;
 use App\Http\Requests\UpdateOrderColumnRequest;
 use App\Models\OrderColumn;
 use App\Services\OrderColumnService;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request as ApiRequest;
 use Throwable;
 
 /**
@@ -41,9 +43,9 @@ class OrderColumnController extends \App\Http\Controllers\Controller
      * @return LengthAwarePaginator
      * @throws Throwable
      */
-    public function index(): LengthAwarePaginator
+    public function index(ApiRequest $request): LengthAwarePaginator|Collection
     {
-        return $this->service->paginatedList();
+        return $this->service->paginatedList($request, $request->has('all'));
     }
 
     /**

@@ -33,5 +33,12 @@ class OrderColumnSeeder extends Seeder
                 'en' => 'Ready'
             ]
         ]);
+        OrderColumn::create([
+            'title' => [
+                'uz' => 'Arxiv',
+                'ru' => 'Архив',
+                'en' => 'Archive'
+            ]
+        ]);
     }
 }

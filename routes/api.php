@@ -44,6 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Route::post('change-status', [OrderController::class, 'changeStatus']);
     Route::apiResource('payment_types', PaymentTypeController::class);
     Route::apiResource('order_columns', OrderColumnController::class);
+    Route::get('report', [OrderController::class, 'report']);
+
 //routes
 
 });

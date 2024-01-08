@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+
 /**
  * @OA\Schema(
  *   description="OrderColumn model",
@@ -70,4 +71,10 @@ class OrderColumn extends Model
     public static $rules = [
         "title" => 'array|required',
     ];
+
+    public function scopeFilter(Builder $query, $data)
+    {
+        if (!$data['all']) $query->where('id', 1)->orWhere('id', 2)->orWhere('id', 3);
+        return $query;
+    }
 }
