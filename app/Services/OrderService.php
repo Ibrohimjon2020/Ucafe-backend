@@ -162,20 +162,70 @@ class OrderService extends BaseService
     {
         return $this->getRepository()->findById($id, ['orderItems']);
     }
+
+    // get Main statistics
+    public function getMainStatistics($request, $conditions)
+    {
+        // get Sum Price from Expense Table
+        $expense = $this->expenseRepository->getAllList($request)->sum('price');
+
+        $order = $this->repository->getAllList($request);
+
+        // get Total Number Of Sales 
+        $totalNumberOfSales = $this->getTotalNumberOfSales($order);
+
+        // Statistics by payment type   
+        $statisticsByPaymentType = $this->getSumPriceStatistics($conditions);
+
+        $respone = [];
+
+        array_push(
+            $respone,
+            ['Expense' => $expense],
+            ['In come order sum price' => $order->sum('price')],
+            ['Total number of sale product' => $totalNumberOfSales],
+            ['Statistics by payment type sum price' => $statisticsByPaymentType]
+        );
+        return $respone;
+    }
+
+    // get Total Number Of Sales 
+    public function getTotalNumberOfSales($order)
+    {
+        $totalNumberOfSales = 0;
+        foreach ($order as $item) {
+            $orderItems = $this->orderItemRepository->getAllList($item->id);
+            if (!$orderItems) continue;
+            $totalNumberOfSales += $orderItems->sum('quantity');
+        }
+        return $totalNumberOfSales;
+    }
+
     // get From date To date Sum Price Statistics
 
-    public function getSumPriceStatistics($model, $groupBy)
+    public function getSumPriceStatistics($conditions)
     {
-        return $model->groupBy($groupBy)
-            ->map(function ($group) {
-                return $group->sum('price');
-            });
+        $response = DB::table('orders as o')
+            ->join('payment_types as pt', "o.payment_type", '=', 'pt.id')
+            ->select('pt.title as title', DB::raw('sum(o.price) as total_price'))
+            ->whereBetween("o.created_at", $conditions)
+            ->groupBy('title')
+            ->get();
+        return $response;
     }
 
     // get From date To date Count Order Statistics
 
-    public function getCountOrderStatistics($model, $groupBy)
+    public function getCountOrderStatistics($model)
     {
+        // sell order by order_detail
+        $groupBy = function ($item) {
+            // Extract the value of the 'name' key from the JSON in the 'order_detail' column
+            $orderDetail = json_decode($item->order_detail, true);
+
+            // Check if $orderDetail is an array and has the 'name' key
+            return is_array($orderDetail) && array_key_exists('name', $orderDetail) ? $orderDetail['name'] : null;
+        };
         return $model->groupBy($groupBy)
             ->map(function ($group) {
                 return $group->count('id');
@@ -184,9 +234,8 @@ class OrderService extends BaseService
 
     // get Statistics by Menu Type 
 
-    public function getStatisticsByMenuType($request)
+    public function getStatisticsByMenuType($conditions)
     {
-        $conditions = [$request->from_date, $request->to_date];
         $response = DB::table('order_items as oi')
             ->join('menu_items as mi', 'oi.product_id', '=', 'mi.id')
             ->join('menu_types as mt', 'mi.menu_type_id', '=', 'mt.id')
@@ -197,41 +246,60 @@ class OrderService extends BaseService
         return $response;
     }
 
+    // get Statistics by Product
+    public function getStatisticsByProduct($conditions)
+    {
+        $respone = DB::table('order_items as oi')
+            ->join('menu_items as mi', 'oi.product_id', '=', 'mi.id')
+            ->join('menu_types as mt', 'mi.menu_type_id', '=', 'mt.id')
+            ->select('mi.title as name', 'mt.title as category', DB::raw('sum(oi.quantity) as total_quantity'), 'mi.price as price', DB::raw('sum(oi.price * oi.quantity) as total_price'))
+            ->whereBetween('oi.created_at', $conditions)
+            ->groupBy('mi.id')
+            ->get();
+        return $respone;
+    }
+
     public function getReport($request)
     {
         $response = [];
-        $expense = $this->expenseRepository->getAllList($request)->sum('price');
+        // interval date
+        $interval = $request->interval;
+
+        // get From date To date from request
+        $conditions = [$request->from_date, $request->to_date];
+
+        // // get Sum Price from Expense Table
+        // $expense = $this->expenseRepository->getAllList($request)->sum('price');
+
         $order = $this->repository->getAllList($request);
-        $totalNumberOfSales = 0;
-        foreach ($order as $item) {
-            $orderItems = $this->orderItemRepository->getAllList($item->id);
-            if (!$orderItems) continue;
-            $totalNumberOfSales += $orderItems->sum('quantity');
-        }
-        // Statistics by payment type   
-        $statisticsByPaymentType = $this->getSumPriceStatistics($order, 'payment_type');
 
-        // sell order by order_detail
-        $orderDetailTake = function ($item) {
-            // Extract the value of the 'name' key from the JSON in the 'order_detail' column
-            $orderDetail = json_decode($item->order_detail, true);
+        // // get Total Number Of Sales 
+        // $totalNumberOfSales = $this->getTotalNumberOfSales($order);
 
-            // Check if $orderDetail is an array and has the 'name' key
-            return is_array($orderDetail) && array_key_exists('name', $orderDetail) ? $orderDetail['name'] : null;
-        };
-        $sellOrderByOrderDetail = $this->getCountOrderStatistics($order, $orderDetailTake);
+        // // Statistics by payment type   
+        // $statisticsByPaymentType = $this->getSumPriceStatistics($conditions);
+
+        $mainStatistics = $this->getMainStatistics($request, $conditions);
+
+        // get sell order by order_detail
+        $sellOrderByOrderDetail = $this->getCountOrderStatistics($order);
 
         // find total products and price by menu type
-        $productCategory = $this->getStatisticsByMenuType($request);
+        $productCategory = $this->getStatisticsByMenuType($conditions);
+
+        // get Statistics by Product
+        $productCategory = $this->getStatisticsByProduct($conditions);
+
+        // get Orders with pagination
+        $orders = $this->repository->paginatedList($request);
 
         array_push(
             $response,
-            ['Expense' => $expense],
-            ['In come order sum price' => $order->sum('price')],
-            ['Total number of sale product' => $totalNumberOfSales],
-            ['Statistics by payment type sum price' => $statisticsByPaymentType],
+            $mainStatistics,
             ['Sell order by order_detail count' => $sellOrderByOrderDetail],
-            ['productCategory' => $productCategory],
+            ['Sell product by category' => $productCategory],
+            ['Product' => $productCategory],
+            ['Orders' => $orders],
         );
         return $response;
     }
