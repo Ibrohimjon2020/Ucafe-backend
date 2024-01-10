@@ -177,16 +177,14 @@ class OrderService extends BaseService
         // Statistics by payment type   
         $statisticsByPaymentType = $this->getSumPriceStatistics($conditions);
 
-        $respone = [];
-
-        array_push(
-            $respone,
-            ['Expense' => $expense],
-            ['In come order sum price' => $order->sum('price')],
-            ['Total number of sale product' => $totalNumberOfSales],
-            ['Statistics by payment type sum price' => $statisticsByPaymentType]
+        return array_merge(
+            [
+                'expense' => array('value' => $expense),
+                'in_come_price' => array('value' => $order->sum('price'), 'title' => 'In come order sum price'),
+                'total_number' => array('value' => $totalNumberOfSales, 'title' => 'Total number of sales'),
+                'by_payment_type' => array('value' => $statisticsByPaymentType)
+            ]
         );
-        return $respone;
     }
 
     // get Total Number Of Sales 
@@ -202,7 +200,6 @@ class OrderService extends BaseService
     }
 
     // get From date To date Sum Price Statistics
-
     public function getSumPriceStatistics($conditions)
     {
         $response = DB::table('orders as o')
@@ -215,7 +212,6 @@ class OrderService extends BaseService
     }
 
     // get From date To date Count Order Statistics
-
     public function getCountOrderStatistics($model)
     {
         // sell order by order_detail
@@ -233,7 +229,6 @@ class OrderService extends BaseService
     }
 
     // get Statistics by Menu Type 
-
     public function getStatisticsByMenuType($conditions)
     {
         $response = DB::table('order_items as oi')
@@ -259,25 +254,54 @@ class OrderService extends BaseService
         return $respone;
     }
 
+    // get calculate that interval and before interval
+    public function getInterval($mainStatistics, $beforeMainStatistics)
+    {
+        $x = ['expense', 'in_come_price', 'total_number'];
+        $respone = [];
+        foreach ($x as $key => $value) {
+            $before = $beforeMainStatistics["$value"]['value'] / 100;
+            if ($before == 0) {
+                $beforeNowDividing = 0;
+            } else {
+                $beforeNowDividing = $mainStatistics["$value"]['value'] / $before;
+                $beforeNowDividing == 0 ? $different = 0 : $different = ceil($beforeNowDividing - 100);
+            }
+            $respone[$value] = [
+                "value" => $mainStatistics["$value"]['value'],
+                "different" => $different,
+            ];
+        };
+        $result = [];
+        for ($x = 0; $x <= 1; $x++) {
+            $paymentCash = $beforeMainStatistics['by_payment_type']['value'][$x]->total_price / 100;
+            if ($paymentCash == 0) {
+                $differentCash = 0;
+            } else {
+                $beforeNowDividing = $mainStatistics['by_payment_type']['value'][$x]->total_price / $paymentCash;
+                $beforeNowDividing == 0 ? $differentCash = 0 : $differentCash = ceil($beforeNowDividing - 100);
+            }
+            array_push(
+                $result,
+                [
+                    "title" => $beforeMainStatistics['by_payment_type']['value'][$x]->title,
+                    "value" => $mainStatistics['by_payment_type']['value'][$x]->total_price,
+                    "different" => $differentCash
+
+                ]
+            );
+        }
+        $respone['by_payment_type'] = $result;
+
+        return $respone;
+    }
+
     public function getReport($request)
     {
-        $response = [];
-        // interval date
-        $interval = $request->interval;
-
         // get From date To date from request
         $conditions = [$request->from_date, $request->to_date];
 
-        // // get Sum Price from Expense Table
-        // $expense = $this->expenseRepository->getAllList($request)->sum('price');
-
         $order = $this->repository->getAllList($request);
-
-        // // get Total Number Of Sales 
-        // $totalNumberOfSales = $this->getTotalNumberOfSales($order);
-
-        // // Statistics by payment type   
-        // $statisticsByPaymentType = $this->getSumPriceStatistics($conditions);
 
         $mainStatistics = $this->getMainStatistics($request, $conditions);
 
@@ -285,7 +309,7 @@ class OrderService extends BaseService
         $sellOrderByOrderDetail = $this->getCountOrderStatistics($order);
 
         // find total products and price by menu type
-        $productCategory = $this->getStatisticsByMenuType($conditions);
+        $Category = $this->getStatisticsByMenuType($conditions);
 
         // get Statistics by Product
         $productCategory = $this->getStatisticsByProduct($conditions);
@@ -293,14 +317,32 @@ class OrderService extends BaseService
         // get Orders with pagination
         $orders = $this->repository->paginatedList($request);
 
-        array_push(
-            $response,
-            $mainStatistics,
-            ['Sell order by order_detail count' => $sellOrderByOrderDetail],
-            ['Sell product by category' => $productCategory],
-            ['Product' => $productCategory],
-            ['Orders' => $orders],
+        $from_date = new Carbon($request->from_date);
+        $to_date = new Carbon($request->to_date);
+        $interval = $to_date->diffInDays($from_date);
+
+        // before interval dates
+        $before_to_date = $request->from_date;
+        $before_from_date = $from_date->subDay($interval);
+        $conditions = [$before_from_date, $before_to_date];
+
+        $request_before_interval = array("from_date" => $before_from_date, "to_date" => $before_to_date);
+
+        $beforeMainStatistics = $this->getMainStatistics($request_before_interval, $conditions);
+        //  get main statistics with before interval dates
+        $get_main = $this->getInterval($mainStatistics, $beforeMainStatistics);
+        return array_merge(
+            [
+                'main_statistics' => $get_main,
+                'charts' =>  [
+                    'by_order_detail' => array('value' => $sellOrderByOrderDetail, 'title' => 'Sell order by order_detail count'),
+                    'by_category' => array('value' => $Category, 'title' => 'Sell product by category'),
+                ],
+                'tables' => [
+                    'product' => $productCategory,
+                    'orders' => $orders,
+                ]
+            ]
         );
-        return $response;
     }
 }
