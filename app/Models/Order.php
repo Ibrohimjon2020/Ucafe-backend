@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Log;
 use Wildside\Userstamps\Userstamps;
 
 /**
@@ -110,26 +111,25 @@ class Order extends Model
         if ($data['from_date'] && $data['to_date'])  $query->whereBetween('created_at', [$data['from_date'], $data['to_date']]);
         elseif (isset($data['from_date'])) $query->whereBetween('created_at', [$data['from_date'], date("Y-m-d h:i:s")]);
         elseif (!$data['from_date'] && !$data['to_date']) $query->whereDate('created_at', now()->toDateString());
-        if (isset($data['payment_type']) && (is_array($data['payment_type']))) {
-            $query->whereIn('payment_type', $data['payment_type']);
-        } elseif (isset($data['payment_type'])) {
-            $query->where('payment_type', $data['payment_type']);
+        if (isset($data['payment_type'])) {
+            $peyment_type = explode(',', $data['payment_type']);
+            if (gettype($peyment_type) == 'array')  $query->whereIn('payment_type', $peyment_type);
         }
-        if (isset($data['order_detail']) && is_array($data['order_detail'])) {
-            $query->where(function ($query) use ($data) {
-                foreach ($data['order_detail'] as $jsonString) {
-                    // Check if it's a valid JSON string
-                    $decodedArray = json_decode($jsonString, true);
-        
-                    // Proceed if it's a valid JSON string
-                    if (json_last_error() == JSON_ERROR_NONE) {
-                        $query->orWhereJsonContains('order_detail', $decodedArray);
+        if (isset($data['order_detail'])) {
+            $order_detail = explode(',', $data['order_detail']);
+            if (gettype($order_detail) == 'array') {
+                $query->where(function ($query) use ($order_detail) {
+                    foreach ($order_detail as $jsonString) {
+                        // Check if it's a valid JSON string
+                        $decodedArray = json_decode(json_decode($jsonString, true), true);
+                        // Proceed if it's a valid JSON string
+                        if (json_last_error() == JSON_ERROR_NONE) {
+                            $query->orWhere('order_detail->name', $decodedArray['name']);
+                        }
                     }
-                }
-            });
-        }elseif (isset($data['order_detail'])) {
-            $query->whereJsonContains('order_detail', json_decode($data['order_detail'], true));
-        }    
+                });
+            }
+        } 
         if (isset($data['payment_status'])) $query->where('payment_status', $data['payment_status']);
         if (isset($data['all'])) $query->whereIn('order_status', [1, 2, 3]);
 
