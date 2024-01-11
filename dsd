@@ -1,0 +1,25 @@
+[33m7f80362[m[33m ([m[1;36mHEAD -> [m[1;32mibrohimjon[m[33m, [m[1;31morigin/ibrohimjon[m[33m)[m HEAD@{0}: commit: modify Order Model's scopeFilter change payment_type and order_detail
+[33m79e1fb2[m HEAD@{1}: commit: modify Order model's scopeFilter
+[33m4a1ff72[m HEAD@{2}: commit: add some feature
+[33md1b9e6d[m HEAD@{3}: commit: add some feature. add report rout for showing sidebar
+[33m696d36c[m HEAD@{4}: merge origin: Merge made by the 'ort' strategy.
+[33m31b9a19[m HEAD@{5}: commit: Bug fix. create method modify in OrderService
+[33ma137e56[m HEAD@{6}: commit: add scopeFilter method to Order Model and make reletion
+[33m7df30b8[m HEAD@{7}: commit: Modify Delete method end deleted (change order status path) in order collection
+[33m3b3398c[m HEAD@{8}: merge origin: Merge made by the 'ort' strategy.
+[33mf035aa1[m HEAD@{9}: commit: Modify Order
+[33mfff847f[m HEAD@{10}: commit: add reletion to Order. For showing orderStatus, orderPaymentType, Cashier
+[33mcab69bc[m HEAD@{11}: commit: OrderController is done and add change order status
+[33m429460b[m HEAD@{12}: commit: Add PaymentType and modify OrderColumn, Order
+[33mb827437[m HEAD@{13}: merge origin: Merge made by the 'ort' strategy.
+[33mabea5c1[m HEAD@{14}: merge origin: Merge made by the 'ort' strategy.
+[33m9f50e99[m HEAD@{15}: commit: add some feature and add create, update_by fields to Order
+[33mdd03175[m HEAD@{16}: reset: moving to HEAD
+[33mdd03175[m HEAD@{17}: reset: moving to HEAD
+[33mdd03175[m HEAD@{18}: reset: moving to HEAD
+[33mdd03175[m HEAD@{19}: commit (merge): Merge remote-tracking branch 'origin' into ibrohimjon
+[33m0a01447[m HEAD@{20}: commit: Add user_id, employee_id fields to Order and Made OrderColumnSedder
+[33m429db91[m HEAD@{21}: commit: Create Order and OrderItem
+[33m87a6d55[m HEAD@{22}: pull origin master: Fast-forward
+[33md8c82dc[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{23}: checkout: moving from master to ibrohimjon
+[33md8c82dc[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{24}: clone: from github.com:SamixGroup/ucafe.git

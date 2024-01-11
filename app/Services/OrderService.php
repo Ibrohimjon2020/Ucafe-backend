@@ -173,16 +173,19 @@ class OrderService extends BaseService
 
         // get Total Number Of Sales 
         $totalNumberOfSales = $this->getTotalNumberOfSales($order);
+        
+        // get sell order by order_detail
+        $sellOrderByOrderDetail = $this->getCountOrderStatistics($order); 
 
-        // Statistics by payment type   
-        $statisticsByPaymentType = $this->getSumPriceStatistics($conditions);
+        // // Statistics by payment type   
+        // $statisticsByPaymentType = $this->getSumPriceStatistics($conditions);
 
         return array_merge(
             [
                 'expense' => array('value' => $expense),
                 'in_come_price' => array('value' => $order->sum('price'), 'title' => 'In come order sum price'),
                 'total_number' => array('value' => $totalNumberOfSales, 'title' => 'Total number of sales'),
-                'by_payment_type' => array('value' => $statisticsByPaymentType)
+                'by_order_detail' => array('value' => $sellOrderByOrderDetail)
             ]
         );
     }
@@ -305,6 +308,9 @@ class OrderService extends BaseService
 
         $mainStatistics = $this->getMainStatistics($request, $conditions);
 
+        // Statistics by payment type   
+        $statisticsByPaymentType = $this->getSumPriceStatistics($conditions);
+
         // get sell order by order_detail
         $sellOrderByOrderDetail = $this->getCountOrderStatistics($order);
 
@@ -334,8 +340,8 @@ class OrderService extends BaseService
         return array_merge(
             [
                 'main_statistics' => $get_main,
+                'by_order_detail' => array('value' => $sellOrderByOrderDetail, 'title' => 'Sell order by order_detail count'),
                 'charts' =>  [
-                    'by_order_detail' => array('value' => $sellOrderByOrderDetail, 'title' => 'Sell order by order_detail count'),
                     'by_category' => array('value' => $Category, 'title' => 'Sell product by category'),
                 ],
                 'tables' => [
